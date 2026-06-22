@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>exploration_manager</name>
+  <version>0.1.0</version>
+  <description>Compatibility launch package for the ROS2 Humble FUEL deployment.</description>
+  <maintainer email="nuaa@example.com">nuaa</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>fuel_ros2</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

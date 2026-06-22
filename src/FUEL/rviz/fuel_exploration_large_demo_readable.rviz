@@ -1,0 +1,168 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Plane: XY
+      Reference Frame: map
+      Cell Size: 2
+    - Class: rviz_default_plugins/MarkerArray
+      Name: World Bounds
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_bounds
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Exploration Map Cloud - Downsampled
+      Enabled: true
+      Topic:
+        Value: /map_cloud
+      Style: Points
+      Size (Pixels): 3
+      Alpha: 0.75
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Gazebo/RViz World Obstacles
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_obstacles
+    - Class: rviz_default_plugins/Marker
+      Name: UAV Current Pose - RED ARROW
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_marker
+    - Class: rviz_default_plugins/Path
+      Name: UAV History Trail - YELLOW THICK
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_trail
+      Color: 255; 240; 20
+      Line Style: Lines
+      Line Width: 0.20
+    - Class: rviz_default_plugins/Marker
+      Name: Current Goal - MAGENTA LARGE
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/current_goal
+    - Class: rviz_default_plugins/Path
+      Name: Future Global Path - GREEN GLOBAL PATH
+      Enabled: true
+      Topic:
+        Value: /fuel/global_path
+      Color: 20; 230; 80
+      Line Width: 0.20
+    - Class: rviz_default_plugins/Path
+      Name: Future Local Trajectory - CYAN
+      Enabled: true
+      Topic:
+        Value: /fuel/local_trajectory
+      Color: 20; 230; 255
+      Line Width: 0.22
+    - Class: rviz_default_plugins/Path
+      Name: Active PlanManager Trajectory - BLUE ACTIVE TRAJECTORY
+      Enabled: true
+      Topic:
+        Value: /fuel/plan_manager/managed_trajectory
+      Color: 60; 130; 255
+      Line Width: 0.30
+    - Class: rviz_default_plugins/Marker
+      Name: Legend - ALWAYS VISIBLE
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/legend_marker
+    - Class: rviz_default_plugins/Marker
+      Name: UAV Label
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_label
+    - Class: rviz_default_plugins/Marker
+      Name: Goal Label
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/goal_label
+    - Class: rviz_default_plugins/Marker
+      Name: Path Label
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/path_label
+    - Class: rviz_default_plugins/Marker
+      Name: Demo Warning - TOP LEFT
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/warning_text
+    - Class: rviz_default_plugins/Marker
+      Name: Compact Status - TOP LEFT
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/status_text
+    - Class: rviz_default_plugins/MarkerArray
+      Name: FIS Frontier Clusters
+      Enabled: false
+      Topic:
+        Value: /fuel/fis/frontier_clusters
+    - Class: rviz_default_plugins/MarkerArray
+      Name: FIS Viewpoints
+      Enabled: false
+      Topic:
+        Value: /fuel/fis/viewpoints
+    - Class: rviz_default_plugins/Pose
+      Name: FIS Best Viewpoint
+      Enabled: false
+      Topic:
+        Value: /fuel/fis/best_viewpoint
+      Shape: Arrow
+    - Class: rviz_default_plugins/Path
+      Name: FSM Path
+      Enabled: false
+      Topic:
+        Value: /fuel/fsm/path
+      Color: 255; 255; 120
+      Line Width: 0.08
+    - Class: rviz_default_plugins/Path
+      Name: Path Searching Path
+      Enabled: false
+      Topic:
+        Value: /fuel/path_searching/path
+      Color: 20; 220; 120
+      Line Width: 0.10
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Path Searching Debug
+      Enabled: false
+      Topic:
+        Value: /fuel/path_searching/debug_markers
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Plan Manager Debug
+      Enabled: false
+      Topic:
+        Value: /fuel/plan_manager/debug_markers
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Safety Gate Debug
+      Enabled: false
+      Topic:
+        Value: /fuel/safety_gate/debug_markers
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+    Frame Rate: 15
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 32
+      Focal Point:
+        X: 0
+        Y: -3
+        Z: 1.6
+      Pitch: 0.72
+      Yaw: 0.80
+Window Geometry:
+  Height: 900
+  Width: 1450

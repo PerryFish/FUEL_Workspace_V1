@@ -1,0 +1,8 @@
+# P2F Coverage Stall And Goal Reselect Analysis
+
+- main_coverage_blocker: COVERAGE_GROWING
+- coverage_stall_max_duration_sec: 60.03044819831848
+- path_done_without_reselect_count: 0
+- coverage_stall_without_reselect_count: 0
+- goal_reselect_after_path_done_count: 11
+- goal_reselect_after_coverage_stall_count: 6

@@ -1,0 +1,8 @@
+{
+  "coverage_stall_max_duration_sec": 179.96832275390625,
+  "coverage_stall_without_reselect_count": 0,
+  "goal_reselect_after_coverage_stall_count": 2,
+  "goal_reselect_after_path_done_count": 17,
+  "main_coverage_blocker": "FRONTIER_SCORING_OR_REACHABILITY_LIMIT",
+  "path_done_without_reselect_count": 0
+}

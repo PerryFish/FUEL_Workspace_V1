@@ -1,0 +1,99 @@
+# P2B Stuck Analysis p2b_office_300s_20260621_162703
+
+- main_stuck_cause: REPEATED_GOAL
+- stuck_event_count: 51
+- event_counts: {'COVERAGE_STALL': 12, 'MOTION_STUCK': 51, 'REPEATED_GOAL': 25}
+- coverage_proxy_gain: 0.11522603445737005
+- uav_total_distance: 9.701332888591038
+- trajectory_count: 6436
+
+## Events
+
+- t=1.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=7.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=12.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=17.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=20.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=20.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=22.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=25.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=27.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=30.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=33.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=35.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=38.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=40.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=40.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=43.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=45.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=49.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=50.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=54.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=55.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=60.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=60.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=60.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=65.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=65.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=70.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=70.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=75.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=76.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=80.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=80.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=81.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=85.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=86.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=90.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=92.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=95.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=97.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=100.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=100.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=103.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=105.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=108.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=110.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=113.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=115.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[0.8476680806039344, -5.460276599496729, 1.2] goal=[8.746598480958033, -7.479590885748216, 1.2] frontier=106 coverage=0.07613017228685025
+- t=119.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[2.478027423212043, -3.5435507007452327, 1.2] goal=[7.5, -5.75, 1.2] frontier=102 coverage=0.08555441024885878
+- t=124.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[3.7876507713608283, -2.748227987630995, 1.2] goal=[7.5, -5.75, 1.2] frontier=113 coverage=0.09357973788838168
+- t=129.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[6.177327713509418, -3.182197356315327, 1.2] goal=[7.5, -5.75, 1.2] frontier=124 coverage=0.10513915476365779
+- t=146.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499871377566169, -5.694995583376205, 1.2] goal=[7.5, -7.475, 1.2] frontier=128 coverage=0.11493152702105729
+- t=151.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.4999997197288115, -5.749880144133796, 1.2] goal=[7.5, -7.475, 1.2] frontier=128 coverage=0.11493152702105729
+- t=156.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999389105, -5.7499997387553705, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=161.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.4999999999986695, -5.749999999431051, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=166.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999998762, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=171.3s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=176.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=176.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=181.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=186.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=191.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.499999999999989, -5.749999999999989, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=196.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=196.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=201.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=206.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=211.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=216.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=216.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=221.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=226.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=231.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=236.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=236.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=241.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=246.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=251.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=256.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=256.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=261.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=266.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=271.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=276.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=276.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=281.4s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=286.5s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=291.5s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=296.3s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005
+- t=296.5s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[7.49999999999999, -5.74999999999999, 1.2] goal=[7.5, -7.475, 1.2] frontier=131 coverage=0.11522603445737005

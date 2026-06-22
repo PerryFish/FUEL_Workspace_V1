@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="fuel_office">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <model name="pillar">
+      <pose>4 2.2 1.8 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><cylinder><radius>0.55</radius><length>3.6</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.55</radius><length>3.6</length></cylinder></geometry></visual>
+      </link>
+    </model>
+    <model name="corridor_wall_left">
+      <pose>0 -6 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>16 0.25 3</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>16 0.25 3</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="corridor_wall_right">
+      <pose>0 6 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>16 0.25 3</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>16 0.25 3</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="office_block">
+      <pose>-2.05 0.15 1.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.9 2.7 2.8</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.9 2.7 2.8</size></box></geometry></visual>
+      </link>
+    </model>
+  </world>
+</sdf>

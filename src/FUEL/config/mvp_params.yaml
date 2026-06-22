@@ -1,0 +1,17 @@
+fuel_mvp_node:
+  ros__parameters:
+    frame_id: map
+    odom_frame_id: odom
+    base_frame_id: base_link
+    box_min_x: -8.0
+    box_min_y: -6.0
+    box_min_z: 0.5
+    box_max_x: 8.0
+    box_max_y: 6.0
+    box_max_z: 4.0
+    default_z: 1.4
+    fake_controller_speed: 0.7
+    waypoint_accept_radius: 0.25
+    replan_period_s: 4.0
+    publish_tf: true
+    planner_backend: "mvp"

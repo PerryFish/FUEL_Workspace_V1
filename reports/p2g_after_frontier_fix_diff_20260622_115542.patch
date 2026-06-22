@@ -1,0 +1,763 @@
+diff --git a/src/FUEL/scripts/frontier_viewpoint_lite.py b/src/FUEL/scripts/frontier_viewpoint_lite.py
+new file mode 100755
+index 0000000..ac057d3
+--- /dev/null
++++ b/src/FUEL/scripts/frontier_viewpoint_lite.py
+@@ -0,0 +1,757 @@
++#!/usr/bin/env python3
++import math
++import re
++from typing import Dict, List, Optional, Tuple
++
++import rclpy
++from geometry_msgs.msg import PoseStamped
++from nav_msgs.msg import Odometry
++from rclpy.executors import ExternalShutdownException
++from rclpy.node import Node
++from sensor_msgs.msg import PointCloud2
++from std_msgs.msg import String
++
++from p11_lite_collision_utils import OccupancyGrid2D
++from p11_lite_utils import make_cloud, make_pose, parse_bounds, read_cloud, world_config_path
++from world_collision_checker import load_obstacles, point_collision
++
++
++class FrontierViewpointLite(Node):
++    def __init__(self):
++        super().__init__("frontier_viewpoint_lite")
++        self.world_config = world_config_path(str(self.declare_parameter("world_config", "").value))
++        self.clearance = float(self.declare_parameter("clearance", 0.35).value)
++        self.min_viewpoint_distance = float(self.declare_parameter("min_viewpoint_distance", 2.5).value)
++        self.min_goal_distance = self.min_viewpoint_distance
++        self.cluster_resolution = float(self.declare_parameter("cluster_resolution", 1.0).value)
++        self.best_hold_sec = float(self.declare_parameter("best_hold_sec", 5.0).value)
++        self.best_max_hold_sec = float(self.declare_parameter("best_max_hold_sec", 45.0).value)
++        self.best_refresh_score_slack = float(self.declare_parameter("best_refresh_score_slack", 1.0).value)
++        self.switch_score_margin = float(self.declare_parameter("switch_score_margin", 2.5).value)
++        self.revisit_penalty = float(self.declare_parameter("revisit_penalty", 8.0).value)
++        self.visited_region_resolution = float(self.declare_parameter("visited_region_resolution", 2.0).value)
++        self.revisit_penalty_weight = float(self.declare_parameter("revisit_penalty_weight", 2.0).value)
++        self.recent_revisit_penalty_weight = float(self.declare_parameter("recent_revisit_penalty_weight", 3.0).value)
++        self.visited_region_memory_sec = float(self.declare_parameter("visited_region_memory_sec", 180.0).value)
++        self.trail_exclusion_radius = float(self.declare_parameter("trail_exclusion_radius", 1.5).value)
++        self.region_task_resolution = float(self.declare_parameter("region_task_resolution", 4.0).value)
++        self.unknown_gain_weight = float(self.declare_parameter("unknown_gain_weight", 4.0).value)
++        self.frontier_density_weight = float(self.declare_parameter("frontier_density_weight", 2.0).value)
++        self.boundary_penalty_weight = float(self.declare_parameter("boundary_penalty_weight", 1.5).value)
++        self.low_clearance_penalty_weight = float(self.declare_parameter("low_clearance_penalty_weight", 2.0).value)
++        self.information_gain_weight = float(self.declare_parameter("information_gain_weight", 3.0).value)
++        self.novelty_weight = float(self.declare_parameter("novelty_weight", 2.0).value)
++        self.distance_cost_weight = float(self.declare_parameter("distance_cost_weight", 0.8).value)
++        self.boundary_follow_penalty_weight = float(self.declare_parameter("boundary_follow_penalty_weight", 1.2).value)
++        self.low_gain_reject_threshold = float(self.declare_parameter("low_gain_reject_threshold", 0.15).value)
++        self.behind_penalty = float(self.declare_parameter("behind_penalty", 5.0).value)
++        self.too_close_penalty = float(self.declare_parameter("too_close_penalty", 4.0).value)
++        self.frame_id = str(self.declare_parameter("frame_id", "map").value)
++        self.min_wall_clearance_for_viewpoint = float(self.declare_parameter("min_wall_clearance_for_viewpoint", 0.8).value)
++        self.boundary_penalty_distance = float(self.declare_parameter("boundary_penalty_distance", 1.5).value)
++        self.min_boundary_goal_distance = float(self.declare_parameter("min_boundary_goal_distance", 2.0).value)
++        self.boundary_hard_reject = bool(self.declare_parameter("boundary_hard_reject", True).value)
++        self.boundary_tangent_reject_threshold = float(self.declare_parameter("boundary_tangent_reject_threshold", 0.75).value)
++        self.inward_direction_weight = float(self.declare_parameter("inward_direction_weight", 4.0).value)
++        self.boundary_goal_penalty_weight = float(self.declare_parameter("boundary_goal_penalty_weight", 5.0).value)
++        self.inward_goal_offset = float(self.declare_parameter("inward_goal_offset", 1.5).value)
++        self.unreachable_blacklist_ttl_sec = float(self.declare_parameter("unreachable_blacklist_ttl_sec", 90.0).value)
++        self.unreachable_region_resolution = float(self.declare_parameter("unreachable_region_resolution", 2.0).value)
++        self.unreachable_path_fail_threshold = int(self.declare_parameter("unreachable_path_fail_threshold", 2).value)
++        self.bounds = parse_bounds(self.world_config)
++        self.obstacles = load_obstacles(self.world_config)
++        self.complex_grid = OccupancyGrid2D(self.bounds, 0.25, 0.45)
++        self.complex_env_received = False
++        self.frontiers: List[Tuple[float, float, float]] = []
++        self.odom: Optional[Odometry] = None
++        self.recent: List[Tuple[float, float, float, float]] = []
++        self.odom_trail: List[Tuple[float, float, float, float]] = []
++        self.visited_regions: Dict[Tuple[int, int], float] = {}
++        self.region_status: Dict[str, str] = {}
++        self.active_region_id = "NONE"
++        self.active_region_start_sec = 0.0
++        self.region_switch_count = 0
++        self.best = None
++        self.best_score = float("-inf")
++        self.best_stamp_sec = 0.0
++        self.best_viewpoint_update_count = 0
++        self.revisit_penalty_count = 0
++        self.recent_revisit_penalty_count = 0
++        self.trail_exclusion_count = 0
++        self.visited_region_count = 0
++        self.too_close_penalty_count = 0
++        self.too_close_filtered_count = 0
++        self.behind_penalty_count = 0
++        self.boundary_penalty_count = 0
++        self.boundary_follow_penalty_count = 0
++        self.low_clearance_viewpoint_reject_count = 0
++        self.low_gain_reject_count = 0
++        self.information_gain = 0.0
++        self.selected_goal_information_gain = 0.0
++        self.novelty_score = 0.0
++        self.selected_goal_revisit_score = 0.0
++        self.selected_goal_region = "NONE"
++        self.region_count = 0
++        self.completed_region_count = 0
++        self.stale_region_count = 0
++        self.blacklisted_region_count = 0
++        self.active_region_count = 0
++        self.selected_region_score = 0.0
++        self.selected_region_unknown_gain = 0.0
++        self.selected_unknown_gain = 0.0
++        self.selected_frontier_density = 0.0
++        self.selected_distance_cost = 0.0
++        self.selected_revisit_penalty = 0.0
++        self.selected_boundary_penalty = 0.0
++        self.selected_total_score = 0.0
++        self.selected_goal_boundary_distance = -1.0
++        self.boundary_penalty = 0.0
++        self.boundary_goal_count = 0
++        self.boundary_follow_ratio = 0.0
++        self.boundary_follow_reject_count = 0
++        self.boundary_goal_reject_count = 0
++        self.selected_goal_inward_score = 0.0
++        self.selected_goal_boundary_tangent_score = 0.0
++        self.boundary_hard_reject_enabled = self.boundary_hard_reject
++        self.inward_goal_used_count = 0
++        self.inward_goal_collision_reject_count = 0
++        self.selected_inward_goal_offset = 0.0
++        self.selected_unknown_centroid = "NONE"
++        self.active_region_boundary_score = 0.0
++        self.active_region_internal_unknown_gain = 0.0
++        self.active_region_revisit_score = 0.0
++        self.region_score = 0.0
++        self.top_region_list = "NONE"
++        self.selected_goal_clearance = -1.0
++        self.best_viewpoint_distance = -1.0
++        self.unreachable_goal_fail_counts: Dict[Tuple[float, float, float], int] = {}
++        self.unreachable_blacklisted_regions: Dict[Tuple[int, int], float] = {}
++        self.unreachable_blacklist_event_count = 0
++        self.reachability_reject_count = 0
++        self.last_reachability_reject_goal = "NONE"
++        self.last_reachability_reject_reason = "none"
++
++        self.create_subscription(PointCloud2, "/fuel/p11_lite/frontier_candidates_raw", self._frontier_cb, 10)
++        self.create_subscription(PointCloud2, "/fuel/p11_lite/complex_env/occupied_points", self._complex_occupied_cb, 10)
++        self.create_subscription(PointCloud2, "/fuel/p11_lite/occupancy_grid", lambda _msg: None, 10)
++        self.create_subscription(Odometry, "/odom", self._odom_cb, 20)
++        self.create_subscription(String, "/fuel/p11_lite/goal_to_path_status", self._goal_to_path_status_cb, 10)
++        self.viewpoints_pub = self.create_publisher(PointCloud2, "/fuel/p11_lite/frontier_viewpoints", 10)
++        self.best_pub = self.create_publisher(PoseStamped, "/fuel/p11_lite/best_viewpoint", 10)
++        self.status_pub = self.create_publisher(String, "/fuel/p11_lite/frontier_status", 10)
++        self.timer = self.create_timer(1.0, self._tick)
++        self.get_logger().info("P11_LITE_FRONTIER_VIEWPOINT_READY REAL_FLIGHT_COMMAND=false")
++
++    def _frontier_cb(self, msg: PointCloud2) -> None:
++        self.frontiers = read_cloud(msg)
++
++    @staticmethod
++    def _status_field(data: str, key: str, default: str = "UNKNOWN") -> str:
++        token = f"{key}="
++        for part in data.split():
++            if part.startswith(token):
++                return part[len(token):]
++        return default
++
++    @staticmethod
++    def _parse_goal_key(data: str) -> Optional[Tuple[float, float, float]]:
++        match = re.search(r"goal_key=\(([^)]*)\)", data)
++        if not match:
++            return None
++        try:
++            values = [float(part.strip()) for part in match.group(1).split(",")]
++        except ValueError:
++            return None
++        if len(values) != 3:
++            return None
++        return values[0], values[1], values[2]
++
++    def _unreachable_region_key(self, x: float, y: float) -> Tuple[int, int]:
++        res = max(0.5, self.unreachable_region_resolution)
++        return (math.floor(x / res), math.floor(y / res))
++
++    def _prune_unreachable_blacklist(self, now: float) -> None:
++        ttl = max(1.0, self.unreachable_blacklist_ttl_sec)
++        self.unreachable_blacklisted_regions = {k: t for k, t in self.unreachable_blacklisted_regions.items() if now - t <= ttl}
++
++    def _is_unreachable_blacklisted(self, x: float, y: float, now: Optional[float] = None) -> bool:
++        now = self.get_clock().now().nanoseconds / 1e9 if now is None else now
++        self._prune_unreachable_blacklist(now)
++        return self._unreachable_region_key(x, y) in self.unreachable_blacklisted_regions
++
++    def _goal_to_path_status_cb(self, msg: String) -> None:
++        goal = self._parse_goal_key(msg.data)
++        if goal is None:
++            return
++        path_feasible = self._status_field(msg.data, "path_feasible", "true")
++        path_valid = self._status_field(msg.data, "path_valid", "true")
++        request_reselect = self._status_field(msg.data, "request_reselect", "false")
++        reject_reason = self._status_field(msg.data, "reject_reason", self._status_field(msg.data, "reason", "none"))
++        try:
++            endpoint_distance = float(self._status_field(msg.data, "endpoint_to_goal_distance", "0"))
++        except ValueError:
++            endpoint_distance = 0.0
++        infeasible = (
++            path_feasible == "false"
++            or path_valid == "false"
++            or request_reselect == "true"
++            or endpoint_distance > 1.5
++        )
++        key = (round(goal[0], 1), round(goal[1], 1), round(goal[2], 1))
++        if not infeasible:
++            self.unreachable_goal_fail_counts.pop(key, None)
++            return
++        count = self.unreachable_goal_fail_counts.get(key, 0) + 1
++        self.unreachable_goal_fail_counts[key] = count
++        if count < max(1, self.unreachable_path_fail_threshold):
++            return
++        now = self.get_clock().now().nanoseconds / 1e9
++        self._prune_unreachable_blacklist(now)
++        region = self._unreachable_region_key(goal[0], goal[1])
++        if region not in self.unreachable_blacklisted_regions:
++            self.unreachable_blacklist_event_count += 1
++        self.unreachable_blacklisted_regions[region] = now
++        self.last_reachability_reject_goal = f"({goal[0]:.2f},{goal[1]:.2f},{goal[2]:.2f})"
++        self.last_reachability_reject_reason = reject_reason
++
++    def _odom_cb(self, msg: Odometry) -> None:
++        self.odom = msg
++        p = msg.pose.pose.position
++        now = self.get_clock().now().nanoseconds / 1e9
++        point = (float(p.x), float(p.y), float(p.z), now)
++        if not self.odom_trail or math.dist(self.odom_trail[-1][:3], point[:3]) > 0.2:
++            self.odom_trail.append(point)
++            self.odom_trail = self.odom_trail[-80:]
++            self.visited_regions[self._region_key(float(p.x), float(p.y))] = now
++            self._prune_visited_regions(now)
++
++    def _complex_occupied_cb(self, msg: PointCloud2) -> None:
++        self.complex_grid.update_from_points(read_cloud(msg))
++        self.complex_env_received = True
++
++    def _boundary_distance(self, x: float, y: float) -> float:
++        return min(x - self.bounds["min_x"], self.bounds["max_x"] - x, y - self.bounds["min_y"], self.bounds["max_y"] - y)
++
++    def _boundary_inward_vector(self, x: float, y: float) -> Tuple[float, float]:
++        distances = {
++            "min_x": x - self.bounds["min_x"],
++            "max_x": self.bounds["max_x"] - x,
++            "min_y": y - self.bounds["min_y"],
++            "max_y": self.bounds["max_y"] - y,
++        }
++        side = min(distances, key=distances.get)
++        if side == "min_x":
++            return 1.0, 0.0
++        if side == "max_x":
++            return -1.0, 0.0
++        if side == "min_y":
++            return 0.0, 1.0
++        return 0.0, -1.0
++
++    def _boundary_direction_scores(self, ox: float, oy: float, x: float, y: float) -> Tuple[float, float]:
++        vx, vy = x - ox, y - oy
++        norm = math.hypot(vx, vy)
++        if norm < 1e-6:
++            return 0.0, 1.0
++        vx, vy = vx / norm, vy / norm
++        ix, iy = self._boundary_inward_vector(x, y)
++        inward = max(0.0, vx * ix + vy * iy)
++        tangent = math.sqrt(max(0.0, 1.0 - min(1.0, inward * inward)))
++        return inward, tangent
++
++    def _unknown_centroid(self, x: float, y: float) -> Tuple[float, float]:
++        nearby = [(fx, fy) for fx, fy, _ in self.frontiers if math.hypot(fx - x, fy - y) <= 3.0]
++        if nearby:
++            n = float(len(nearby))
++            return sum(p[0] for p in nearby) / n, sum(p[1] for p in nearby) / n
++        ix, iy = self._boundary_inward_vector(x, y)
++        return x + ix * self.inward_goal_offset, y + iy * self.inward_goal_offset
++
++    def _inward_goal(self, x: float, y: float, z: float) -> Tuple[Tuple[float, float, float], Tuple[float, float], bool]:
++        ux, uy = self._unknown_centroid(x, y)
++        dx, dy = ux - x, uy - y
++        if math.hypot(dx, dy) < 1e-3 or self._boundary_distance(x, y) < self.min_boundary_goal_distance * 1.5:
++            dx, dy = self._boundary_inward_vector(x, y)
++        norm = max(1e-6, math.hypot(dx, dy))
++        candidate = (x + dx / norm * self.inward_goal_offset, y + dy / norm * self.inward_goal_offset, z)
++        candidate = (
++            min(self.bounds["max_x"] - 0.25, max(self.bounds["min_x"] + 0.25, candidate[0])),
++            min(self.bounds["max_y"] - 0.25, max(self.bounds["min_y"] + 0.25, candidate[1])),
++            candidate[2],
++        )
++        if self._boundary_distance(candidate[0], candidate[1]) < self.min_boundary_goal_distance:
++            return (x, y, z), (ux, uy), False
++        if point_collision(self.obstacles, candidate, self.clearance).collides:
++            self.inward_goal_collision_reject_count += 1
++            return (x, y, z), (ux, uy), False
++        if self.complex_env_received and self.complex_grid.clearance(candidate) < self.min_wall_clearance_for_viewpoint:
++            self.inward_goal_collision_reject_count += 1
++            return (x, y, z), (ux, uy), False
++        return candidate, (ux, uy), True
++
++    def _boundary_goal_rejected(self, ox: float, oy: float, x: float, y: float, only_remaining_frontier: bool) -> bool:
++        boundary_distance = self._boundary_distance(x, y)
++        inward, tangent = self._boundary_direction_scores(ox, oy, x, y)
++        if only_remaining_frontier:
++            return False
++        hard_boundary = self.boundary_hard_reject and boundary_distance < self.min_boundary_goal_distance
++        tangent_boundary = tangent >= self.boundary_tangent_reject_threshold and inward < 0.35 and boundary_distance < self.min_boundary_goal_distance * 1.5
++        if hard_boundary or tangent_boundary:
++            self.boundary_goal_reject_count += 1
++            self.boundary_follow_reject_count += 1
++            return True
++        return False
++
++    def _region_key(self, x: float, y: float) -> Tuple[int, int]:
++        res = max(0.1, self.visited_region_resolution)
++        return (math.floor(x / res), math.floor(y / res))
++
++    def _task_region_key(self, x: float, y: float) -> Tuple[int, int]:
++        res = max(0.5, self.region_task_resolution)
++        return (math.floor(x / res), math.floor(y / res))
++
++    @staticmethod
++    def _region_id(key: Tuple[int, int]) -> str:
++        return f"R{key[0]}_{key[1]}"
++
++    def _prune_visited_regions(self, now: float) -> None:
++        horizon = max(1.0, self.visited_region_memory_sec)
++        self.visited_regions = {k: t for k, t in self.visited_regions.items() if now - t <= horizon}
++        self.visited_region_count = len(self.visited_regions)
++
++    def _estimate_information_gain(self, x: float, y: float) -> float:
++        near_15 = sum(1 for fx, fy, _ in self.frontiers if math.hypot(fx - x, fy - y) <= 1.5)
++        near_30 = sum(1 for fx, fy, _ in self.frontiers if math.hypot(fx - x, fy - y) <= 3.0)
++        if near_30 <= 0:
++            return 0.0
++        density = min(1.0, near_15 / max(1.0, near_30))
++        raw = min(1.0, near_30 / 18.0)
++        boundary_factor = 0.7 if self._boundary_distance(x, y) < self.boundary_penalty_distance else 1.0
++        return max(0.0, min(1.0, (0.75 * raw + 0.25 * density) * boundary_factor))
++
++    def _novelty_score(self, x: float, y: float, now: float) -> float:
++        if not self.visited_regions:
++            return 1.0
++        key = self._region_key(x, y)
++        if key not in self.visited_regions:
++            return 1.0
++        age = max(0.0, now - self.visited_regions[key])
++        return max(0.0, min(1.0, age / max(1.0, self.visited_region_memory_sec)))
++
++    def _cluster(self):
++        buckets: Dict[Tuple[int, int], List[Tuple[float, float, float]]] = {}
++        for x, y, z in self.frontiers:
++            key = (round(x / self.cluster_resolution), round(y / self.cluster_resolution))
++            buckets.setdefault(key, []).append((x, y, z))
++        clustered = []
++        for points in buckets.values():
++            n = float(len(points))
++            clustered.append((sum(p[0] for p in points) / n, sum(p[1] for p in points) / n, sum(p[2] for p in points) / n))
++        return clustered
++
++    def _build_region_tasks(self, ox: float, oy: float, now: float):
++        self._prune_unreachable_blacklist(now)
++        buckets: Dict[Tuple[int, int], List[Tuple[float, float, float]]] = {}
++        for x, y, z in self.frontiers:
++            buckets.setdefault(self._task_region_key(x, y), []).append((x, y, z))
++        tasks = []
++        for key, points in buckets.items():
++            n = float(len(points))
++            cx = sum(p[0] for p in points) / n
++            cy = sum(p[1] for p in points) / n
++            cz = sum(p[2] for p in points) / n
++            region_id = self._region_id(key)
++            frontier_count = len(points)
++            unknown_gain = min(1.0, frontier_count / 35.0)
++            density = min(1.0, frontier_count / max(1.0, self.region_task_resolution * self.region_task_resolution))
++            distance = math.hypot(cx - ox, cy - oy)
++            boundary_distance = self._boundary_distance(cx, cy)
++            boundary_penalty = max(0.0, self.min_boundary_goal_distance - boundary_distance) / max(0.1, self.min_boundary_goal_distance)
++            boundary_region_penalty = min(1.0, boundary_penalty)
++            visit_key = self._region_key(cx, cy)
++            novelty = self._novelty_score(cx, cy, now)
++            revisit_penalty = 1.0 - novelty if visit_key in self.visited_regions else 0.0
++            internal_unknown_gain = unknown_gain * max(0.0, 1.0 - 0.85 * boundary_region_penalty)
++            score = (
++                5.0 * internal_unknown_gain
++                + self.frontier_density_weight * density
++                + 2.0 * novelty
++                - self.distance_cost_weight * (distance / 30.0)
++                - 3.0 * revisit_penalty
++                - 5.0 * boundary_region_penalty
++            )
++            status = self.region_status.get(region_id, "active")
++            if self._is_unreachable_blacklisted(cx, cy, now):
++                status = "blacklisted"
++            elif frontier_count <= 1:
++                status = "completed"
++            elif boundary_penalty > 0.8 and score < 0.0:
++                status = "stale"
++            self.region_status[region_id] = status
++            tasks.append(
++                {
++                    "region_id": region_id,
++                    "region_center": (cx, cy, cz),
++                    "frontier_count": frontier_count,
++                    "unknown_gain_estimate": unknown_gain,
++                    "internal_unknown_gain": internal_unknown_gain,
++                    "frontier_density": density,
++                    "distance_to_uav": distance,
++                    "path_cost_estimate": distance,
++                    "revisit_penalty": revisit_penalty,
++                    "boundary_penalty": boundary_penalty,
++                    "boundary_region_penalty": boundary_region_penalty,
++                    "boundary_distance": boundary_distance,
++                    "score": score,
++                    "status": status,
++                }
++            )
++        return sorted(tasks, key=lambda t: t["score"], reverse=True)
++
++    def _forward_vector(self) -> Tuple[float, float]:
++        if len(self.odom_trail) >= 2:
++            ax, ay, _az, _at = self.odom_trail[-2]
++            bx, by, _bz, _bt = self.odom_trail[-1]
++            dx, dy = bx - ax, by - ay
++            norm = math.hypot(dx, dy)
++            if norm > 1e-3:
++                return dx / norm, dy / norm
++        if self.odom is None:
++            return 1.0, 0.0
++        q = self.odom.pose.pose.orientation
++        yaw = math.atan2(2.0 * (q.w * q.z + q.x * q.y), 1.0 - 2.0 * (q.y * q.y + q.z * q.z))
++        return math.cos(yaw), math.sin(yaw)
++
++    def _is_current_best_valid(self, valid: List[Tuple[float, float, float]]) -> bool:
++        if self.best is None:
++            return False
++        if self.odom is not None:
++            op = self.odom.pose.pose.position
++            if math.dist((float(op.x), float(op.y), float(op.z)), self.best) < self.min_viewpoint_distance:
++                return False
++        return any(math.dist(self.best, candidate) <= max(0.75, self.cluster_resolution) for candidate in valid)
++
++    def _tick(self) -> None:
++        valid = []
++        candidate_best = None
++        candidate_score = float("-inf")
++        self.revisit_penalty_count = 0
++        self.recent_revisit_penalty_count = 0
++        self.trail_exclusion_count = 0
++        self.too_close_penalty_count = 0
++        self.too_close_filtered_count = 0
++        self.behind_penalty_count = 0
++        self.boundary_penalty_count = 0
++        self.boundary_follow_penalty_count = 0
++        self.low_clearance_viewpoint_reject_count = 0
++        self.low_gain_reject_count = 0
++        self.information_gain = 0.0
++        self.selected_goal_information_gain = 0.0
++        self.selected_goal_revisit_score = 0.0
++        self.selected_goal_region = "NONE"
++        self.region_count = 0
++        self.completed_region_count = 0
++        self.stale_region_count = 0
++        self.blacklisted_region_count = 0
++        self.active_region_count = 0
++        self.selected_region_score = 0.0
++        self.selected_region_unknown_gain = 0.0
++        self.selected_unknown_gain = 0.0
++        self.selected_frontier_density = 0.0
++        self.selected_distance_cost = 0.0
++        self.selected_revisit_penalty = 0.0
++        self.selected_boundary_penalty = 0.0
++        self.selected_total_score = 0.0
++        self.selected_goal_boundary_distance = -1.0
++        self.boundary_penalty = 0.0
++        self.boundary_goal_count = 0
++        self.boundary_follow_ratio = 0.0
++        self.boundary_follow_reject_count = 0
++        self.boundary_goal_reject_count = 0
++        self.inward_goal_used_count = 0
++        self.inward_goal_collision_reject_count = 0
++        self.novelty_score = 0.0
++        self.selected_goal_inward_score = 0.0
++        self.selected_goal_boundary_tangent_score = 0.0
++        self.selected_inward_goal_offset = 0.0
++        self.selected_unknown_centroid = "NONE"
++        self.active_region_boundary_score = 0.0
++        self.active_region_internal_unknown_gain = 0.0
++        self.active_region_revisit_score = 0.0
++        self.region_score = 0.0
++        self.top_region_list = "NONE"
++        self.selected_goal_clearance = -1.0
++        self.best_viewpoint_distance = -1.0
++        now = self.get_clock().now().nanoseconds / 1e9
++        self._prune_visited_regions(now)
++        self._prune_unreachable_blacklist(now)
++        if self.odom is not None:
++            op = self.odom.pose.pose.position
++            ox, oy, oz = float(op.x), float(op.y), float(op.z)
++            fx, fy = self._forward_vector()
++            tasks = self._build_region_tasks(ox, oy, now)
++            task_by_id = {t["region_id"]: t for t in tasks}
++            self.top_region_list = ",".join(f"{t['region_id']}:{t['score']:.2f}" for t in tasks[:5]) if tasks else "NONE"
++            self.region_count = len(tasks)
++            self.completed_region_count = sum(1 for t in tasks if t["status"] == "completed")
++            self.stale_region_count = sum(1 for t in tasks if t["status"] == "stale")
++            self.blacklisted_region_count = sum(1 for t in tasks if t["status"] == "blacklisted")
++            self.active_region_count = sum(1 for t in tasks if t["status"] == "active")
++            def usable_region(task) -> bool:
++                return task["status"] != "blacklisted" and not (task["boundary_region_penalty"] > 0.25 and task["internal_unknown_gain"] < 0.35)
++
++            active_task = next((t for t in tasks if t["region_id"] == self.active_region_id and t["status"] == "active" and usable_region(t)), None)
++            top_usable_task = next((t for t in tasks if t["status"] == "active" and usable_region(t)), None)
++            active_age = now - self.active_region_start_sec if self.active_region_start_sec > 0.0 else 0.0
++            hold_active_task = active_task is not None
++            if active_task is not None and top_usable_task is not None and top_usable_task["region_id"] != active_task["region_id"]:
++                clearly_better = top_usable_task["score"] >= active_task["score"] * 1.6 + 0.5
++                active_low_gain = active_task["internal_unknown_gain"] < 0.25 and top_usable_task["internal_unknown_gain"] > active_task["internal_unknown_gain"] + 0.20
++                if active_age >= 60.0 and (clearly_better or active_low_gain):
++                    hold_active_task = False
++            preferred_task = active_task if hold_active_task else top_usable_task
++            if preferred_task is None:
++                preferred_task = next((t for t in tasks if t["status"] == "active"), None)
++            if preferred_task is not None and preferred_task["region_id"] != self.active_region_id:
++                self.active_region_id = preferred_task["region_id"]
++                self.active_region_start_sec = now
++                self.region_switch_count += 1
++            if preferred_task is not None:
++                self.active_region_boundary_score = preferred_task["boundary_region_penalty"]
++                self.active_region_internal_unknown_gain = preferred_task["internal_unknown_gain"]
++                self.active_region_revisit_score = preferred_task["revisit_penalty"]
++                self.region_score = preferred_task["score"]
++            clustered = self._cluster()
++            non_boundary_candidate_exists = any(self._boundary_distance(cx, cy) >= self.min_boundary_goal_distance for cx, cy, _ in clustered)
++            for x, y, _ in clustered:
++                region_id = self._region_id(self._task_region_key(x, y))
++                task = task_by_id.get(region_id)
++                base_viewpoint = (x, y, max(0.8, min(2.6, oz)))
++                viewpoint, unknown_centroid, inward_used = self._inward_goal(*base_viewpoint)
++                if inward_used:
++                    self.inward_goal_used_count += 1
++                vx, vy, _vz = viewpoint
++                if self._is_unreachable_blacklisted(vx, vy, now):
++                    self.reachability_reject_count += 1
++                    continue
++                dist = math.dist((ox, oy, oz), viewpoint)
++                if dist < self.min_viewpoint_distance:
++                    self.too_close_filtered_count += 1
++                    continue
++                if self._boundary_goal_rejected(ox, oy, vx, vy, not non_boundary_candidate_exists):
++                    continue
++                if point_collision(self.obstacles, viewpoint, self.clearance).collides:
++                    continue
++                clearance = self.complex_grid.clearance(viewpoint) if self.complex_env_received else 999.0
++                if clearance < self.min_wall_clearance_for_viewpoint:
++                    self.low_clearance_viewpoint_reject_count += 1
++                    continue
++                local_gain = sum(1 for fx, fy, _ in self.frontiers if math.hypot(fx - x, fy - y) <= 2.0)
++                information_gain = self._estimate_information_gain(x, y)
++                if local_gain <= 0 or information_gain < self.low_gain_reject_threshold:
++                    self.low_gain_reject_count += 1
++                    continue
++                revisit = any(now - t < 60.0 and math.hypot(x - rx, y - ry) < 1.5 for rx, ry, _rz, t in self.recent)
++                near_trail = any(now - t < self.visited_region_memory_sec and math.hypot(x - tx, y - ty) < self.trail_exclusion_radius for tx, ty, _tz, t in self.odom_trail[:-3])
++                region_key = self._region_key(x, y)
++                visited_region = region_key in self.visited_regions
++                recent_region = visited_region and now - self.visited_regions[region_key] < 60.0
++                novelty = self._novelty_score(x, y, now)
++                behind = (x - ox) * fx + (y - oy) * fy < -0.3
++                too_close = False
++                penalty = 0.0
++                revisit_score = 0.0
++                if visited_region:
++                    self.revisit_penalty_count += 1
++                    revisit_score += 1.0
++                    penalty += self.revisit_penalty_weight * (1.0 - novelty)
++                if recent_region:
++                    self.recent_revisit_penalty_count += 1
++                    revisit_score += 1.0
++                    penalty += self.recent_revisit_penalty_weight
++                if revisit:
++                    self.revisit_penalty_count += 1
++                    revisit_score += 1.0
++                    penalty += self.revisit_penalty
++                if near_trail:
++                    self.trail_exclusion_count += 1
++                    revisit_score += 1.0
++                    penalty += self.revisit_penalty_weight * 1.2
++                if too_close:
++                    self.too_close_penalty_count += 1
++                    penalty += self.too_close_penalty + (self.min_goal_distance - dist) * 2.0
++                if behind:
++                    self.behind_penalty_count += 1
++                    penalty += self.behind_penalty
++                boundary_distance = self._boundary_distance(vx, vy)
++                inward_score, tangent_score = self._boundary_direction_scores(ox, oy, vx, vy)
++                if boundary_distance < self.min_boundary_goal_distance:
++                    self.boundary_penalty_count += 1
++                    self.boundary_follow_penalty_count += 1
++                    self.boundary_goal_count += 1
++                    self.boundary_penalty = (self.min_boundary_goal_distance - boundary_distance) / max(0.1, self.min_boundary_goal_distance)
++                    penalty += self.boundary_penalty * self.boundary_goal_penalty_weight
++                    if information_gain < 0.50:
++                        self.boundary_follow_reject_count += 1
++                        continue
++                distance_cost = dist / 30.0
++                score = (
++                    self.unknown_gain_weight * information_gain
++                    + self.frontier_density_weight * min(1.0, local_gain / 12.0)
++                    + self.novelty_weight * novelty
++                    + self.inward_direction_weight * inward_score
++                    + 0.08 * float(local_gain)
++                    - self.distance_cost_weight * distance_cost
++                    - penalty
++                )
++                if preferred_task is not None:
++                    if region_id == preferred_task["region_id"]:
++                        score += 1.0
++                    else:
++                        score -= 0.25
++                if task is not None:
++                    score += 0.25 * task["unknown_gain_estimate"]
++                valid.append(viewpoint)
++                if not too_close and score > candidate_score:
++                    candidate_score = score
++                    candidate_best = viewpoint
++                    self.information_gain = information_gain
++                    self.selected_goal_information_gain = information_gain
++                    self.selected_unknown_gain = information_gain
++                    self.selected_frontier_density = min(1.0, local_gain / 12.0)
++                    self.selected_distance_cost = distance_cost
++                    self.selected_revisit_penalty = revisit_score
++                    self.selected_boundary_penalty = self.boundary_penalty
++                    self.selected_total_score = score
++                    self.selected_goal_revisit_score = revisit_score
++                    self.selected_goal_region = f"({region_key[0]},{region_key[1]})"
++                    self.selected_region_score = task["score"] if task is not None else score
++                    self.selected_region_unknown_gain = task["unknown_gain_estimate"] if task is not None else information_gain
++                    self.novelty_score = novelty
++                    self.selected_goal_clearance = clearance
++                    self.selected_goal_boundary_distance = boundary_distance
++                    self.selected_goal_inward_score = inward_score
++                    self.selected_goal_boundary_tangent_score = tangent_score
++                    self.selected_inward_goal_offset = self.inward_goal_offset if inward_used else 0.0
++                    self.selected_unknown_centroid = f"({unknown_centroid[0]:.2f},{unknown_centroid[1]:.2f})"
++            self.boundary_follow_ratio = self.boundary_goal_count / max(1, len(valid) + self.boundary_goal_count)
++
++        if candidate_best is None:
++            self.best = None
++            self.best_score = float("-inf")
++        else:
++            current_valid = self._is_current_best_valid(valid)
++            hold_active = self.best is not None and now - self.best_stamp_sec < self.best_hold_sec and current_valid
++            materially_better = candidate_score >= self.best_score + self.switch_score_margin
++            stale_best_refresh = (
++                self.best is not None
++                and now - self.best_stamp_sec >= self.best_max_hold_sec
++                and math.dist(self.best, candidate_best) > 1.5
++                and candidate_score >= self.best_score - self.best_refresh_score_slack
++            )
++            if self.best is None or not current_valid or (not hold_active and (materially_better or stale_best_refresh)):
++                if self.best is None or math.dist(self.best, candidate_best) > 0.75:
++                    self.best_viewpoint_update_count += 1
++                self.best = candidate_best
++                self.best_score = candidate_score
++                self.best_stamp_sec = now
++
++        cloud = make_cloud(valid, self.frame_id)
++        cloud.header.stamp = self.get_clock().now().to_msg()
++        self.viewpoints_pub.publish(cloud)
++        if self.best is not None:
++            if self.odom is not None:
++                op = self.odom.pose.pose.position
++                self.best_viewpoint_distance = math.dist((float(op.x), float(op.y), float(op.z)), self.best)
++            pose = make_pose(*self.best, frame_id=self.frame_id)
++            pose.header.stamp = cloud.header.stamp
++            pose.header.frame_id = f"{self.frame_id} score={self.best_score:.3f} gain={self.selected_goal_information_gain:.3f} novelty={self.novelty_score:.3f}"
++            self.best_pub.publish(pose)
++            self.recent.append((self.best[0], self.best[1], self.best[2], now))
++            self.recent = [p for p in self.recent if now - p[3] <= 60.0][-80:]
++        status = String()
++        best_text = "NONE" if self.best is None else f"({self.best[0]:.2f},{self.best[1]:.2f},{self.best[2]:.2f})"
++        status.data = (
++            "REAL_FLIGHT_COMMAND=false "
++            f"candidate_count={len(self.frontiers)} "
++            f"frontier_candidate_count={len(self.frontiers)} "
++            f"valid_viewpoint_count={len(valid)} "
++            f"best_score={self.best_score if self.best is not None else 0.0:.3f} "
++            f"best_viewpoint={best_text} "
++            f"best_viewpoint_distance={self.best_viewpoint_distance:.3f} "
++            f"best_viewpoint_update_count={self.best_viewpoint_update_count} "
++            f"too_close_filtered_count={self.too_close_filtered_count} "
++            f"visited_region_count={self.visited_region_count} "
++            f"region_count={self.region_count} "
++            f"active_region_id={self.active_region_id} "
++            f"active_region_age={now - self.active_region_start_sec if self.active_region_start_sec > 0 else 0.0:.3f} "
++            f"active_region_count={self.active_region_count} "
++            f"completed_region_count={self.completed_region_count} "
++            f"stale_region_count={self.stale_region_count} "
++            f"blacklisted_region_count={self.blacklisted_region_count} "
++            f"unreachable_blacklisted_region_count={len(self.unreachable_blacklisted_regions)} "
++            f"unreachable_blacklist_event_count={self.unreachable_blacklist_event_count} "
++            f"reachability_reject_count={self.reachability_reject_count} "
++            f"last_reachability_reject_goal={self.last_reachability_reject_goal} "
++            f"last_reachability_reject_reason={self.last_reachability_reject_reason} "
++            f"region_switch_count={self.region_switch_count} "
++            f"selected_region_score={self.selected_region_score:.3f} "
++            f"selected_region_unknown_gain={self.selected_region_unknown_gain:.3f} "
++            f"active_region_boundary_score={self.active_region_boundary_score:.3f} "
++            f"active_region_internal_unknown_gain={self.active_region_internal_unknown_gain:.3f} "
++            f"active_region_revisit_score={self.active_region_revisit_score:.3f} "
++            f"region_score={self.region_score:.3f} "
++            f"top_region_list={self.top_region_list} "
++            f"revisit_penalty_count={self.revisit_penalty_count} "
++            f"recent_revisit_penalty_count={self.recent_revisit_penalty_count} "
++            f"trail_exclusion_count={self.trail_exclusion_count} "
++            f"selected_goal_region={self.selected_goal_region} "
++            f"selected_goal_revisit_score={self.selected_goal_revisit_score:.3f} "
++            f"too_close_penalty_count={self.too_close_penalty_count} "
++            f"behind_penalty_count={self.behind_penalty_count}"
++            f" boundary_penalty_count={self.boundary_penalty_count} "
++            f"boundary_follow_penalty_count={self.boundary_follow_penalty_count} "
++            f"low_clearance_viewpoint_reject_count={self.low_clearance_viewpoint_reject_count} "
++            f"information_gain={self.information_gain:.3f} "
++            f"selected_unknown_gain={self.selected_unknown_gain:.3f} "
++            f"selected_frontier_density={self.selected_frontier_density:.3f} "
++            f"selected_distance_cost={self.selected_distance_cost:.3f} "
++            f"selected_revisit_penalty={self.selected_revisit_penalty:.3f} "
++            f"selected_boundary_penalty={self.selected_boundary_penalty:.3f} "
++            f"selected_total_score={self.selected_total_score:.3f} "
++            f"selected_goal_boundary_distance={self.selected_goal_boundary_distance:.3f} "
++            f"selected_goal_inward_score={self.selected_goal_inward_score:.3f} "
++            f"selected_goal_boundary_tangent_score={self.selected_goal_boundary_tangent_score:.3f} "
++            f"boundary_hard_reject_enabled={'true' if self.boundary_hard_reject_enabled else 'false'} "
++            f"boundary_penalty={self.boundary_penalty:.3f} "
++            f"boundary_goal_count={self.boundary_goal_count} "
++            f"boundary_goal_reject_count={self.boundary_goal_reject_count} "
++            f"boundary_follow_ratio={self.boundary_follow_ratio:.3f} "
++            f"boundary_follow_reject_count={self.boundary_follow_reject_count} "
++            f"inward_goal_used_count={self.inward_goal_used_count} "
++            f"inward_goal_collision_reject_count={self.inward_goal_collision_reject_count} "
++            f"selected_inward_goal_offset={self.selected_inward_goal_offset:.3f} "
++            f"selected_unknown_centroid={self.selected_unknown_centroid} "
++            f"selected_goal_information_gain={self.selected_goal_information_gain:.3f} "
++            f"low_gain_reject_count={self.low_gain_reject_count} "
++            f"novelty_score={self.novelty_score:.3f} "
++            f"selected_goal_clearance={self.selected_goal_clearance:.3f}"
++        )
++        self.status_pub.publish(status)
++
++
++def main(args=None):
++    rclpy.init(args=args)
++    node = FrontierViewpointLite()
++    try:
++        rclpy.spin(node)
++    except (KeyboardInterrupt, ExternalShutdownException):
++        pass
++    finally:
++        node.destroy_node()
++        if rclpy.ok():
++            rclpy.shutdown()
++
++
++if __name__ == "__main__":
++    main()

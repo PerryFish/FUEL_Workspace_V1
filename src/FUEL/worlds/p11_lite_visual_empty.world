@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="p11_lite_visual_empty">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <model name="p11_lite_visual_uav_placeholder">
+      <pose>0 -12 1.2 0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="body_visual">
+          <geometry>
+            <box>
+              <size>0.7 0.7 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.1 0.4 1.0 1</ambient>
+            <diffuse>0.1 0.4 1.0 1</diffuse>
+          </material>
+        </visual>
+        <visual name="front_visual">
+          <pose>0.45 0 0 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.12</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.0 1.0 0.3 1</ambient>
+            <diffuse>0.0 1.0 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

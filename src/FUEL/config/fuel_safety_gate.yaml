@@ -1,0 +1,17 @@
+fuel_ros2:
+  ros__parameters:
+    safety_gate:
+      enable_safety_gate: false
+      enable_output_filter: false
+      input_trajectory_topic: "/fuel/local_trajectory"
+      output_safe_trajectory_topic: "/fuel/safety_gate/safe_trajectory"
+      min_obstacle_distance: 0.5
+      min_z: 0.6
+      max_z: 3.0
+      max_speed: 3.0
+      max_acceleration: 2.0
+      max_trajectory_age_sec: 1.0
+      allow_hold_position: true
+      allow_emergency_stop: true
+      assumed_sample_dt: 0.2
+      debug_publish_rate: 2.0

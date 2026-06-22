@@ -1,0 +1,33 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    plan_manager:
+      enable_plan_manager: false
+      use_managed_output: false
+      prefer_bspline_when_valid: true
+      require_collision_checked: true
+      require_dynamic_checked: false
+      min_path_points: 3
+      min_trajectory_points: 5
+      max_allowed_fallback_count: 10
+      publish_contract_debug: true
+      debug_publish_rate: 2.0
+      output_contract_topic: "/fuel/plan_manager/trajectory_contract"
+
+fuel_mvp_node:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    plan_manager:
+      enable_plan_manager: false
+      use_managed_output: false
+      prefer_bspline_when_valid: true
+      require_collision_checked: true
+      require_dynamic_checked: false
+      min_path_points: 3
+      min_trajectory_points: 5
+      max_allowed_fallback_count: 10
+      publish_contract_debug: true
+      debug_publish_rate: 2.0
+      output_contract_topic: "/fuel/plan_manager/trajectory_contract"

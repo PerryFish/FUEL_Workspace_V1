@@ -1,0 +1,19 @@
+# Goal Lifecycle Analysis p2c_after_office_300s_20260621_171817
+
+- metrics_dir: reports/p2c_metrics/p2c_after_office_300s_20260621_171817
+- raw_goal_msg_count: 599
+- unique_goal_count_quantized_0p5m: 14
+- unique_goal_count_quantized_1p0m: 12
+- goal_switch_count: 53
+- same_goal_max_duration_sec: 23.910722732543945
+- goal_republish_count: 545
+- true_repeated_goal_count: 40
+- goal_retire_event_count: 53
+- goal_retire_reasons: {'escape_goal_no_progress': 10, 'no_progress_switch': 3, 'escape_goal_coverage_stall': 40}
+- escape_goal_count: 50
+- result: PARTIAL
+- main_goal_lifecycle_cause: TRUE_REPEATED_GOAL
+
+## Interpretation
+
+Retired goals were selected again within the short-term memory window.

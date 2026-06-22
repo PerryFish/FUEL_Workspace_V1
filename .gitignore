@@ -1,0 +1,40 @@
+# ROS2 / colcon build outputs
+build/
+install/
+log/
+
+# Runtime logs and cache
+.ros/
+logs/
+test-log/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Large debug packages / rosbag
+*.tar.gz
+*.zip
+*.bag
+*.db3
+*.mcap
+
+# Local backup directories from previous recovery attempts
+backup_*/
+
+# Agent/session metadata
+.agents/
+.codex/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

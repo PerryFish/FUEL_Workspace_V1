@@ -1,0 +1,50 @@
+{
+  "active_path_done_event_count": 0,
+  "active_path_endpoint_to_goal_distance_avg": 0.04609657593959517,
+  "active_path_same_hash_max_duration_sec": 45.000773429870605,
+  "active_path_update_count": 221,
+  "coverage_proxy_end": 0.20416728022382566,
+  "coverage_proxy_gain": 0.20416728022382566,
+  "coverage_proxy_gain_per_min": 0.04082983104557952,
+  "coverage_proxy_start": 0.0,
+  "coverage_stall_event_count": 2,
+  "coverage_stall_events": [
+    {
+      "duration_sec": 60.02682113647461,
+      "end_sec": 210.0849642753601,
+      "start_sec": 150.0581431388855
+    }
+  ],
+  "coverage_stall_max_duration_sec": 60.02682113647461,
+  "coverage_stall_without_reselect_count": 0,
+  "duration_sec": 300.0266263484955,
+  "explored_grid_end": 2773,
+  "explored_grid_gain": 1679,
+  "explored_grid_start": 1094,
+  "frontier_count_avg": 134.025,
+  "frontier_count_end": 184,
+  "frontier_count_start": 98,
+  "frontier_nonzero_duration_sec": 300.0,
+  "frontier_zero_duration_sec": 0.0,
+  "global_cloud_points": 13582,
+  "goal_msg_count": 463,
+  "goal_reselect_after_coverage_stall_count": 7,
+  "goal_reselect_after_no_motion_count": 7,
+  "goal_reselect_after_path_done_count": 22,
+  "goal_reselect_count": 21,
+  "goal_switch_count": 21,
+  "main_coverage_blocker": "COVERAGE_GROWING",
+  "odom_max_no_motion_duration_sec": 68.7003002166748,
+  "odom_net_displacement": 20.383187871749765,
+  "odom_total_distance": 70.44073158711846,
+  "path_done_without_reselect_count": 0,
+  "position_cmd_idle_duration_sec": 45.00011682510376,
+  "position_cmd_total_variation": 71.58514950381429,
+  "position_cmd_update_count": 221,
+  "same_goal_max_duration_sec": 40.00255298614502,
+  "status_latest": {
+    "/fuel/p11_lite/exploration_manager_status": "REAL_FLIGHT_COMMAND=false active_goal=true active_goal_valid=true goal_age=3.500 active_goal_age=3.500 goal_distance=8.832 goal_reached=false goal_timeout=false too_close_expired=false no_progress_detected=false path_feasible=false path_infeasible_duration=1.164 path_infeasible_count=58 path_infeasible_retire_count=8 path_status_reason=no_collision_free_grid_path path_status_goal_key=(-6.8, path_endpoint_to_goal_distance=-1.000 goal_switch_count=23 goal_retire_event_count=26 goal_retire_reasons={'goal_reached_switch': 2, 'goal_too_close_switch': 10, 'path_infeasible': 8, 'path_infeasible_reselect': 4, 'goal_timeout': 2} true_repeated_goal_count=0 goal_republish_count=507 goal_hold_active=true goal_progress_score=0.000 coverage_gain_since_goal=0.0000 coverage_proxy=0.204167 window_coverage_gain_30s=0.002062 window_motion_30s=4.373 goal_switch_blocked_by_progress_count=24 goal_switch_blocked_by_similarity_count=51 goal_switch_blocked_by_low_gain_count=65 oscillation_cooldown_active=false active_region_id=R1_1 pending_region_id=R1_1 region_hold_active=false region_stall_detected=false region_switch_reason=region_switch_blocked goal_jitter_suppressed_count=51 goal_jump_reject_count=0 goal_smoothing_applied_count=12 goal_jump_count=13 goal_jitter_score=19.000 coverage_stall_detected=false coverage_stall_duration=0.000 recovery_region_id=NONE recovery_goal=NONE recovery_count=0 escape_goal_count=0 escape_fallback_count=0 escape_skip_recent_count=0 escape_candidate_count=0 escape_active=false escape_reason=none frontier_candidate_count=184 frontier_viewpoint_count=18 last_goal_event=KEEP_GOAL last_goal_event_reason=goal_timeout last_goal_event_goal=(-6.85,1.93,1.20) switch_blocked_by_hysteresis_count=0 switch_blocked_by_score_count=65 switch_blocked_by_rate_count=0 switch_reason=minimum_goal_hold last_switch_reason=goal_timeout min_goal_distance=1.000 reason=minimum_goal_hold",
+    "/fuel/p11_lite/goal_to_path_status": "REAL_FLIGHT_COMMAND=false environment_mode=complex path_planner_mode=failed straight_path_collision=true astar_used=true astar_success=false fallback_used=false fallback_success=false final_path_collision_free=false path_collision_free=false min_clearance=0.000 first_collision_point=(-13.946,6.616,1.200) collision_segment_index=0 backtrack_reject_count=0 short_low_gain_path_reject_count=0 path_direction_flip_count=1 path_expected_gain=0.572 boundary_path_reject_count=0 boundary_follow_reject_count=0 boundary_follow_ratio=0.000 boundary_goal_count=0 selected_goal_boundary_distance=8.000 boundary_penalty=0.000 inflation_radius=0.450 grid_resolution=0.250 goal_key=(-6.8, 1.9, 1.2) goal_distance=8.749 endpoint_to_goal_distance=-1.000 path_feasible=false managed_path_points=0 last_valid_path_points=0 last_valid_goal_key=None empty_path_publish_count=29 clear_stale_path=false path_valid=false reject_reason=no_collision_free_grid_path request_reselect=false executable_path_collision_free=false path_publish_count=228 path_fail_count=7 reason=no_collision_free_grid_path"
+  },
+  "unique_goal_count": 22
+}

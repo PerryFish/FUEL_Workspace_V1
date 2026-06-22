@@ -1,0 +1,54 @@
+# P2B Stuck Analysis p2b_office_120s_20260621_163633
+
+- main_stuck_cause: REPEATED_GOAL
+- stuck_event_count: 17
+- event_counts: {'COVERAGE_STALL': 4, 'MOTION_STUCK': 17, 'REPEATED_GOAL': 22}
+- coverage_proxy_gain: 0.12553379472831688
+- uav_total_distance: 8.35110957173586
+- trajectory_count: 2537
+
+## Events
+
+- t=1.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-1.8699999999999999, -3.8899999999999997, 1.2] frontier=108 coverage=0.10005890148726256
+- t=7.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=12.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=17.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=20.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=20.4s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=23.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=25.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=28.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=30.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=33.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=35.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-3.109, -5.422999999999999, 1.2] frontier=108 coverage=0.10005890148726256
+- t=40.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=40.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=40.4s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=45.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=45.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=50.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=50.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=55.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=55.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=60.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=60.4s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=61.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=65.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=66.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=70.0s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=71.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=75.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=77.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=80.1s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=80.4s type=COVERAGE_STALL reason=20s_frontier_stable_and_coverage_gain_below_0.01 pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=82.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-0.09999999999999992, -1.7000000000000028, 1.2] goal=[-6.0, -9.0, 1.2] frontier=108 coverage=0.10005890148726256
+- t=88.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-1.9749393212582533, -2.9963972143454543, 1.2] goal=[-9.0, -11.0, 1.2] frontier=111 coverage=0.1058754233544397
+- t=93.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-2.784190633673545, -2.465504826236857, 1.2] goal=[-9.0, -11.0, 1.2] frontier=101 coverage=0.10889412457664556
+- t=99.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-3.4272491575179407, -1.822750509634776, 1.2] goal=[-9.0, -11.0, 1.2] frontier=113 coverage=0.11316448240318068
+- t=104.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-4.382449873229342, -1.5011217337771583, 1.2] goal=[-9.0, -11.0, 1.2] frontier=121 coverage=0.11824473567957591
+- t=104.9s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-4.382449873229342, -1.5011217337771583, 1.2] goal=[-9.0, -11.0, 1.2] frontier=121 coverage=0.11824473567957591
+- t=109.9s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-5.047725747133964, -2.0479556995905104, 1.2] goal=[-9.0, -11.0, 1.2] frontier=123 coverage=0.12052716831099985
+- t=110.3s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-5.086121664753978, -2.0862504136846347, 1.2] goal=[-9.0, -11.0, 1.2] frontier=123 coverage=0.12052716831099985
+- t=114.9s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-5.387615684374608, -2.8718984132644927, 1.2] goal=[-9.0, -11.0, 1.2] frontier=123 coverage=0.12384037696951848
+- t=115.8s type=REPEATED_GOAL reason=three_consecutive_goals_within_0.5m pos=[-5.465406767753464, -3.0069643274988733, 1.2] goal=[-9.0, -11.0, 1.2] frontier=123 coverage=0.12384037696951848
+- t=119.9s type=MOTION_STUCK reason=20s_displacement_below_0.2m_with_planner_output pos=[-5.499788356664589, -3.9320395386587648, 1.2] goal=[-9.0, -11.0, 1.2] frontier=123 coverage=0.12553379472831688
