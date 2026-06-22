@@ -11,7 +11,7 @@
 - files_ignored_summary: build/, install/, log/, logs/, test-log/, .ros/, pycache, archives, rosbag files, local backup dirs, agent metadata
 - push_result: PASS
 - clone_test_result: PASS
-- clone_test_path: /tmp/fuel_workspace_v1_clone_test/FUEL_Workspace_V1_20260622_103453
+- clone_test_path: /tmp/fuel_workspace_v1_clone_test/FUEL_Workspace_V1
 
 ## Notes
 
