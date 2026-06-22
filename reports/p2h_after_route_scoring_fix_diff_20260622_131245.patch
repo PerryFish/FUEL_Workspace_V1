@@ -1,0 +1,99 @@
+diff --git a/src/FUEL/scripts/frontier_viewpoint_lite.py b/src/FUEL/scripts/frontier_viewpoint_lite.py
+index ac057d3..cf2c125 100755
+--- a/src/FUEL/scripts/frontier_viewpoint_lite.py
++++ b/src/FUEL/scripts/frontier_viewpoint_lite.py
+@@ -25,9 +25,9 @@ class FrontierViewpointLite(Node):
+         self.min_goal_distance = self.min_viewpoint_distance
+         self.cluster_resolution = float(self.declare_parameter("cluster_resolution", 1.0).value)
+         self.best_hold_sec = float(self.declare_parameter("best_hold_sec", 5.0).value)
+-        self.best_max_hold_sec = float(self.declare_parameter("best_max_hold_sec", 45.0).value)
++        self.best_max_hold_sec = float(self.declare_parameter("best_max_hold_sec", 25.0).value)
+         self.best_refresh_score_slack = float(self.declare_parameter("best_refresh_score_slack", 1.0).value)
+-        self.switch_score_margin = float(self.declare_parameter("switch_score_margin", 2.5).value)
++        self.switch_score_margin = float(self.declare_parameter("switch_score_margin", 1.4).value)
+         self.revisit_penalty = float(self.declare_parameter("revisit_penalty", 8.0).value)
+         self.visited_region_resolution = float(self.declare_parameter("visited_region_resolution", 2.0).value)
+         self.revisit_penalty_weight = float(self.declare_parameter("revisit_penalty_weight", 2.0).value)
+@@ -41,7 +41,12 @@ class FrontierViewpointLite(Node):
+         self.low_clearance_penalty_weight = float(self.declare_parameter("low_clearance_penalty_weight", 2.0).value)
+         self.information_gain_weight = float(self.declare_parameter("information_gain_weight", 3.0).value)
+         self.novelty_weight = float(self.declare_parameter("novelty_weight", 2.0).value)
+-        self.distance_cost_weight = float(self.declare_parameter("distance_cost_weight", 0.8).value)
++        self.distance_cost_weight = float(self.declare_parameter("distance_cost_weight", 1.35).value)
++        self.path_cost_normalizer = float(self.declare_parameter("path_cost_normalizer", 8.0).value)
++        self.near_frontier_bonus = float(self.declare_parameter("near_frontier_bonus", 0.25).value)
++        self.new_region_bonus = float(self.declare_parameter("new_region_bonus", 0.35).value)
++        self.active_region_score_bonus = float(self.declare_parameter("active_region_score_bonus", 0.35).value)
++        self.non_preferred_region_penalty = float(self.declare_parameter("non_preferred_region_penalty", 0.10).value)
+         self.boundary_follow_penalty_weight = float(self.declare_parameter("boundary_follow_penalty_weight", 1.2).value)
+         self.low_gain_reject_threshold = float(self.declare_parameter("low_gain_reject_threshold", 0.15).value)
+         self.behind_penalty = float(self.declare_parameter("behind_penalty", 5.0).value)
+@@ -124,6 +129,9 @@ class FrontierViewpointLite(Node):
+         self.top_region_list = "NONE"
+         self.selected_goal_clearance = -1.0
+         self.best_viewpoint_distance = -1.0
++        self.selected_path_cost_score = 0.0
++        self.selected_near_frontier_bonus = 0.0
++        self.selected_new_region_bonus = 0.0
+         self.unreachable_goal_fail_counts: Dict[Tuple[float, float, float], int] = {}
+         self.unreachable_blacklisted_regions: Dict[Tuple[int, int], float] = {}
+         self.unreachable_blacklist_event_count = 0
+@@ -482,6 +490,9 @@ class FrontierViewpointLite(Node):
+         self.top_region_list = "NONE"
+         self.selected_goal_clearance = -1.0
+         self.best_viewpoint_distance = -1.0
++        self.selected_path_cost_score = 0.0
++        self.selected_near_frontier_bonus = 0.0
++        self.selected_new_region_bonus = 0.0
+         now = self.get_clock().now().nanoseconds / 1e9
+         self._prune_visited_regions(now)
+         self._prune_unreachable_blacklist(now)
+@@ -594,21 +605,25 @@ class FrontierViewpointLite(Node):
+                     if information_gain < 0.50:
+                         self.boundary_follow_reject_count += 1
+                         continue
+-                distance_cost = dist / 30.0
++                distance_cost = dist / max(1.0, self.path_cost_normalizer)
++                near_bonus = self.near_frontier_bonus * max(0.0, (4.0 - dist) / 4.0) if information_gain >= 0.35 else 0.0
++                new_region_bonus = self.new_region_bonus if not visited_region else 0.0
+                 score = (
+                     self.unknown_gain_weight * information_gain
+                     + self.frontier_density_weight * min(1.0, local_gain / 12.0)
+                     + self.novelty_weight * novelty
+                     + self.inward_direction_weight * inward_score
++                    + near_bonus
++                    + new_region_bonus
+                     + 0.08 * float(local_gain)
+                     - self.distance_cost_weight * distance_cost
+                     - penalty
+                 )
+                 if preferred_task is not None:
+                     if region_id == preferred_task["region_id"]:
+-                        score += 1.0
++                        score += self.active_region_score_bonus
+                     else:
+-                        score -= 0.25
++                        score -= self.non_preferred_region_penalty
+                 if task is not None:
+                     score += 0.25 * task["unknown_gain_estimate"]
+                 valid.append(viewpoint)
+@@ -629,6 +644,9 @@ class FrontierViewpointLite(Node):
+                     self.selected_region_unknown_gain = task["unknown_gain_estimate"] if task is not None else information_gain
+                     self.novelty_score = novelty
+                     self.selected_goal_clearance = clearance
++                    self.selected_path_cost_score = self.distance_cost_weight * distance_cost
++                    self.selected_near_frontier_bonus = near_bonus
++                    self.selected_new_region_bonus = new_region_bonus
+                     self.selected_goal_boundary_distance = boundary_distance
+                     self.selected_goal_inward_score = inward_score
+                     self.selected_goal_boundary_tangent_score = tangent_score
+@@ -716,6 +734,9 @@ class FrontierViewpointLite(Node):
+             f"selected_unknown_gain={self.selected_unknown_gain:.3f} "
+             f"selected_frontier_density={self.selected_frontier_density:.3f} "
+             f"selected_distance_cost={self.selected_distance_cost:.3f} "
++            f"selected_path_cost_score={self.selected_path_cost_score:.3f} "
++            f"selected_near_frontier_bonus={self.selected_near_frontier_bonus:.3f} "
++            f"selected_new_region_bonus={self.selected_new_region_bonus:.3f} "
+             f"selected_revisit_penalty={self.selected_revisit_penalty:.3f} "
+             f"selected_boundary_penalty={self.selected_boundary_penalty:.3f} "
+             f"selected_total_score={self.selected_total_score:.3f} "
