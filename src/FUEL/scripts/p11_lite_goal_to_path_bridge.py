@@ -39,6 +39,9 @@ class P11LiteGoalToPathBridge(Node):
         self.odom: Optional[Odometry] = None
         self.goal: Optional[PoseStamped] = None
         self.last_goal_key = None
+        self.goal_received_sec = -999.0
+        self.goal_request_count = 0
+        self.goal_to_path_timeout_sec = float(self.declare_parameter("goal_to_path_timeout_sec", 15.0).value)
         self.last_rejected_goal_key = None
         self.path_publish_count = 0
         self.path_fail_count = 0
@@ -224,6 +227,9 @@ class P11LiteGoalToPathBridge(Node):
             self._publish_empty_paths("goal_changed_clear_previous_path")
             self.last_valid_goal_key = None
             self.last_valid_path_points = 0
+        if new_goal_key != self.last_goal_key:
+            self.goal_received_sec = self.get_clock().now().nanoseconds / 1e9
+            self.goal_request_count += 1
         self.last_goal_key = new_goal_key
         self.goal = msg
 
@@ -364,9 +370,28 @@ class P11LiteGoalToPathBridge(Node):
             self._publish_empty_paths(reject_reason)
         self.last_path_points = len(points)
         self.last_path_valid = executable
+        now = self.get_clock().now().nanoseconds / 1e9
+        wait_sec = 0.0 if self.goal_received_sec < 0.0 else max(0.0, now - self.goal_received_sec)
+        goal_key_text = self._goal_key()
+        goal_id = self.goal_request_count
+        if self.goal is None:
+            status_event = "GOAL_TO_PATH_WAITING"
+        elif executable:
+            status_event = "GOAL_TO_PATH_SUCCESS"
+        elif wait_sec >= self.goal_to_path_timeout_sec:
+            status_event = "GOAL_TO_PATH_TIMEOUT"
+        elif request_reselect:
+            status_event = "GOAL_TO_PATH_FAIL"
+        else:
+            status_event = "GOAL_TO_PATH_WAITING"
         status = String()
         status.data = (
             "REAL_FLIGHT_COMMAND=false "
+            f"status_event={status_event} "
+            f"goal_id={goal_id} "
+            f"wait_sec={wait_sec:.3f} "
+            f"GOAL_TO_PATH_REQUEST goal_id={goal_id} goal_key={goal_key_text} "
+            f"{status_event} goal_id={goal_id} path_len={self._path_length(points):.3f} endpoint_dist={self.endpoint_to_goal_distance:.3f} reason={reject_reason if not executable else 'none'} "
             f"environment_mode={self.environment_mode} "
             f"path_planner_mode={self.path_planner_mode} "
             f"straight_path_collision={'true' if self.straight_path_collision else 'false'} "
@@ -391,7 +416,7 @@ class P11LiteGoalToPathBridge(Node):
             f"boundary_penalty={self.boundary_penalty:.3f} "
             f"inflation_radius={self.inflation_radius:.3f} "
             f"grid_resolution={self.complex_grid_resolution if self.environment_mode == 'complex' else self.grid_resolution:.3f} "
-            f"goal_key={self._goal_key()} "
+            f"goal_key={goal_key_text} "
             f"goal_distance={goal_distance:.3f} "
             f"endpoint_to_goal_distance={self.endpoint_to_goal_distance:.3f} "
             f"path_feasible={'true' if self.path_feasible else 'false'} "

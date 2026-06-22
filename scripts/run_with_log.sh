@@ -65,6 +65,65 @@ collect_metadata() {
 
 collect_metadata "$@"
 
+append_run_commands() {
+  if [ -f "$FUEL_WS/scripts/print_fuel_run_commands.sh" ]; then
+    "$FUEL_WS/scripts/print_fuel_run_commands.sh"
+  else
+    cat <<'EOF'
+## Run Commands
+
+### Full Manual Visual Run
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh visual_manual ./scripts/run_manual_visual_demo_persistent.sh
+```
+
+### P2I Full Route Visual Run
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh p2i_visual_route_full ./scripts/run_p2i_visual_route_full.sh
+```
+
+### P2I 300s Route Visual Run
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh p2i_visual_route_300s ./scripts/run_p2i_visual_route_300s.sh
+```
+
+### P2I 300s Headless Route Benchmark
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh p2i_route_300s_after_fix ./scripts/run_p2i_route_300s_after_fix.sh
+```
+
+### P2I 900s Headless Route Benchmark
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh p2i_route_900s_after_fix ./scripts/run_p2i_route_900s_after_fix.sh
+```
+
+### P2I Full Headless Route Run
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/run_with_log.sh p2i_route_full_900s ./scripts/run_p2i_route_full.sh --duration 900
+```
+
+### Clean All FUEL/RViz Processes
+
+```bash
+cd /home/nuaa/ZHY/FUEL_PLANNER_V3
+./scripts/kill_fuel.sh
+```
+EOF
+  fi
+}
+
 set +e
 (
   cd "$FUEL_WS" || exit 1
@@ -120,28 +179,7 @@ if [ -f "$FUEL_WS/scripts/generate_unified_summary_log.py" ]; then
       echo "UNIFIED_SUMMARY_LOG_CREATED=$SUMMARY_PATH"
       echo '```'
       echo
-      echo "## Visual Re-run Commands"
-      echo
-      echo "Manual persistent visual demo:"
-      echo
-      echo '```bash'
-      echo "cd /home/nuaa/ZHY/FUEL_PLANNER_V3"
-      echo "./scripts/run_with_log.sh visual_manual ./scripts/run_manual_visual_demo_persistent.sh"
-      echo '```'
-      echo
-      echo "Coverage visual diagnostic demo:"
-      echo
-      echo '```bash'
-      echo "cd /home/nuaa/ZHY/FUEL_PLANNER_V3"
-      echo "./scripts/run_with_log.sh p2g_visual_coverage_300s ./scripts/run_p2g_visual_coverage_300s.sh"
-      echo '```'
-      echo
-      echo "Clean all FUEL/RViz processes:"
-      echo
-      echo '```bash'
-      echo "cd /home/nuaa/ZHY/FUEL_PLANNER_V3"
-      echo "./scripts/kill_fuel.sh"
-      echo '```'
+      append_run_commands
     } >> "$LOG_FILE"
   else
     {
@@ -152,21 +190,7 @@ if [ -f "$FUEL_WS/scripts/generate_unified_summary_log.py" ]; then
       echo "UNIFIED_SUMMARY_LOG_FAILED=$SUMMARY_OUTPUT"
       echo '```'
       echo
-      echo "## Visual Re-run Commands"
-      echo
-      echo "Manual persistent visual demo:"
-      echo
-      echo '```bash'
-      echo "cd /home/nuaa/ZHY/FUEL_PLANNER_V3"
-      echo "./scripts/run_with_log.sh visual_manual ./scripts/run_manual_visual_demo_persistent.sh"
-      echo '```'
-      echo
-      echo "Coverage visual diagnostic demo:"
-      echo
-      echo '```bash'
-      echo "cd /home/nuaa/ZHY/FUEL_PLANNER_V3"
-      echo "./scripts/run_with_log.sh p2g_visual_coverage_300s ./scripts/run_p2g_visual_coverage_300s.sh"
-      echo '```'
+      append_run_commands
     } >> "$LOG_FILE"
   fi
 else

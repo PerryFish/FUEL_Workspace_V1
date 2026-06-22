@@ -61,6 +61,8 @@ class RouteRationalityRecorder(Node):
         self.coverage_gain_after_goal: List[float] = []
         self.coverage_gain_after_goal_per_meter: List[float] = []
         self.goal_odom_at_switch: Optional[float] = None
+        self.goal_records: List[Dict] = []
+        self.current_goal_record: Optional[Dict] = None
 
         self.best_viewpoint: Optional[Point] = None
         self.frontier_candidates: List[Point] = []
@@ -82,6 +84,9 @@ class RouteRationalityRecorder(Node):
         self.path_length_regrets: List[float] = []
         self.position_cmd_hash = ""
         self.position_cmd_update_count = 0
+        self.travel_traj_hash = ""
+        self.travel_traj_update_count = 0
+        self.active_path_empty_count = 0
 
         self.explored_start: Optional[int] = None
         self.explored_end = 0
@@ -91,6 +96,13 @@ class RouteRationalityRecorder(Node):
 
         self.path_status_latest = ""
         self.manager_status_latest = ""
+        self.path_generation_fail_count = 0
+        self.path_generation_fail_reasons: Dict[str, int] = {}
+        self.goal_to_path_status_events: List[str] = []
+        self.uav_idle_due_to_no_path_start: Optional[float] = None
+        self.uav_idle_due_to_no_path_duration = 0.0
+        self.no_path_blacklist_count = 0
+        self.goal_reselect_due_to_no_path_count = 0
 
         self.create_subscription(Odometry, "/odom", self.odom_cb, 20)
         self.create_subscription(PoseStamped, "/fuel/p11_lite/exploration_goal", self.goal_cb, 10)
@@ -99,7 +111,11 @@ class RouteRationalityRecorder(Node):
             self.create_subscription(PoseStamped, topic, lambda m, t=topic: self.cmd_cb(t, m), 10)
         for topic in ["/fuel/p10_lite/active_path", "/planning/travel_traj"]:
             self.create_subscription(RosPath, topic, lambda m, t=topic: self.path_cb(t, m), 10)
-        for topic in ["/fuel/p11_lite/exploration_manager_status", "/fuel/p11_lite/goal_to_path_status"]:
+        for topic in [
+            "/fuel/p11_lite/exploration_manager_status",
+            "/fuel/p11_lite/goal_to_path_status",
+            "/fuel/p11_lite/goal_lifecycle_status",
+        ]:
             self.create_subscription(String, topic, lambda m, t=topic: self.status_cb(t, m), 10)
         for topic in [
             "/fuel/p11_lite/frontier_candidates_raw",
@@ -217,6 +233,8 @@ class RouteRationalityRecorder(Node):
         now = self.elapsed()
         if self.current_goal is None or dist(self.current_goal, point) > 0.5:
             if self.current_goal is not None:
+                if self.current_goal_record is not None and self.current_goal_record.get("end_time") is None:
+                    self.current_goal_record["end_time"] = now
                 gain = self.coverage() - self.last_goal_coverage
                 meters = self.odom_total - (self.goal_odom_at_switch or self.odom_total)
                 self.coverage_gain_after_goal.append(gain)
@@ -224,6 +242,15 @@ class RouteRationalityRecorder(Node):
                 if gain < 0.003 and meters > 4.0:
                     self.low_efficiency_goal_count += 1
             self.current_goal = point
+            self.current_goal_record = {
+                "time": now,
+                "point": point,
+                "active_path_first": None,
+                "travel_traj_first": None,
+                "end_time": None,
+                "fail_reasons": [],
+            }
+            self.goal_records.append(self.current_goal_record)
             self.last_goal_coverage = self.coverage()
             self.goal_odom_at_switch = self.odom_total
             if self.odom_last is not None:
@@ -258,15 +285,27 @@ class RouteRationalityRecorder(Node):
 
     def path_cb(self, topic: str, msg: RosPath) -> None:
         self.tick(topic)
+        points = self.path_points(msg)
+        if topic == "/planning/travel_traj":
+            ph = self.path_hash(points)
+            if ph != self.travel_traj_hash:
+                self.travel_traj_hash = ph
+                self.travel_traj_update_count += 1
+            if points and self.current_goal_record is not None and self.current_goal_record["travel_traj_first"] is None:
+                self.current_goal_record["travel_traj_first"] = self.elapsed()
+            return
         if topic != "/fuel/p10_lite/active_path":
             return
-        points = self.path_points(msg)
+        if not points:
+            self.active_path_empty_count += 1
         h = self.path_hash(points)
         if h != self.active_path_hash:
             self.active_path_hash = h
             self.active_path_update_count += 1
         if not points:
             return
+        if self.current_goal_record is not None and self.current_goal_record["active_path_first"] is None:
+            self.current_goal_record["active_path_first"] = self.elapsed()
         length = self.path_length(points)
         self.active_path_lengths.append(length)
         if self.current_goal is not None:
@@ -285,8 +324,26 @@ class RouteRationalityRecorder(Node):
         self.tick(topic)
         if topic == "/fuel/p11_lite/goal_to_path_status":
             self.path_status_latest = msg.data
+            self.goal_to_path_status_events.append(msg.data[:500])
+            self.goal_to_path_status_events = self.goal_to_path_status_events[-80:]
+            valid = self.field(msg.data, "path_valid", "true")
+            feasible = self.field(msg.data, "path_feasible", "true")
+            reason = self.field(msg.data, "reject_reason", self.field(msg.data, "reason", "none"))
+            if valid == "false" or feasible == "false":
+                self.path_generation_fail_count += 1
+                self.path_generation_fail_reasons[reason] = self.path_generation_fail_reasons.get(reason, 0) + 1
+                if self.current_goal_record is not None:
+                    self.current_goal_record["fail_reasons"].append(reason)
         elif topic == "/fuel/p11_lite/exploration_manager_status":
             self.manager_status_latest = msg.data
+        elif topic == "/fuel/p11_lite/goal_lifecycle_status":
+            text = msg.data.upper()
+            if self.current_goal_record is not None and self.current_goal_record.get("end_time") is None and "GOAL_RETIRED" in text:
+                self.current_goal_record["end_time"] = self.elapsed()
+            if "NO_PATH_TIMEOUT" in text and "GOAL_BLACKLIST" in text:
+                self.no_path_blacklist_count += 1
+            if "NO_PATH_TIMEOUT" in text and "GOAL_RESELECT" in text:
+                self.goal_reselect_due_to_no_path_count += 1
 
     def cloud_cb(self, topic: str, msg: PointCloud2) -> None:
         self.tick(topic)
@@ -311,6 +368,17 @@ class RouteRationalityRecorder(Node):
             self.nearest_frontier_distances.append(self.nearest_candidate_distance())
 
     def main_issue(self) -> str:
+        no_path = self.no_path_metrics()
+        if no_path["uav_idle_due_to_no_path_duration_sec"] >= 20.0:
+            return "UAV_IDLE_DUE_TO_NO_PATH"
+        if no_path["active_goal_without_travel_traj_max_duration_sec"] >= 10.0:
+            return "TRAVEL_TRAJ_MISSING_AFTER_GOAL"
+        if no_path["active_goal_without_active_path_max_duration_sec"] >= 5.0:
+            return "ACTIVE_PATH_MISSING_AFTER_GOAL"
+        if no_path["goal_to_path_timeout_count"] > 0:
+            return "GOAL_TO_PATH_TIMEOUT"
+        if self.path_generation_fail_count > 5:
+            return "PATH_GENERATION_FAIL"
         gain = self.coverage_gain()
         if self.frontier_candidate_counts and self.frontier_candidate_counts[-1] < 5 and gain < 0.005:
             return "COVERAGE_SATURATED"
@@ -328,12 +396,70 @@ class RouteRationalityRecorder(Node):
             return "VIEWPOINT_REFINEMENT_MISSING"
         return "ROUTE_REASONABLE"
 
+    def no_path_metrics(self) -> Dict[str, object]:
+        now = self.elapsed()
+        latencies = []
+        active_missing = []
+        travel_missing = []
+        path_missing = []
+        timeout_durations = []
+        first_active = []
+        first_travel = []
+        for rec in self.goal_records:
+            start = float(rec["time"])
+            end = float(rec.get("end_time") or now)
+            active_first = rec.get("active_path_first")
+            travel_first = rec.get("travel_traj_first")
+            if active_first is not None:
+                dt = float(active_first) - start
+                latencies.append(dt)
+                first_active.append(dt)
+            else:
+                active_missing.append(end - start)
+                path_missing.append(end - start)
+            if travel_first is not None:
+                first_travel.append(float(travel_first) - start)
+            else:
+                travel_missing.append(end - start)
+            if (active_first is None or float(active_first) - start > 15.0) and (travel_first is None or float(travel_first) - start > 15.0):
+                timeout_durations.append((min(active_first or end, travel_first or end) if active_first or travel_first else end) - start)
+        goal_count = len(self.goal_records)
+        goal_without = sum(
+            1
+            for rec in self.goal_records
+            if (rec.get("active_path_first") is None and float(rec.get("end_time") or now) - float(rec["time"]) > 5.0)
+            or (rec.get("active_path_first") is not None and float(rec["active_path_first"]) - float(rec["time"]) > 5.0)
+        )
+        return {
+            "goal_selected_count": goal_count,
+            "goal_without_path_count": goal_without,
+            "goal_without_path_ratio": float(goal_without) / float(max(goal_count, 1)),
+            "goal_to_path_latency_avg_sec": avg(latencies),
+            "goal_to_path_latency_max_sec": max(latencies) if latencies else 0.0,
+            "goal_to_path_timeout_count": len(timeout_durations),
+            "goal_to_path_timeout_max_duration_sec": max(timeout_durations) if timeout_durations else 0.0,
+            "active_goal_without_active_path_max_duration_sec": max(active_missing) if active_missing else 0.0,
+            "active_goal_without_travel_traj_max_duration_sec": max(travel_missing) if travel_missing else 0.0,
+            "path_missing_after_goal_count": len(path_missing),
+            "path_missing_after_goal_max_duration_sec": max(path_missing) if path_missing else 0.0,
+            "path_generation_fail_count": self.path_generation_fail_count,
+            "path_generation_fail_reasons": self.path_generation_fail_reasons,
+            "goal_to_path_status_events": self.goal_to_path_status_events[-20:],
+            "active_path_empty_count": self.active_path_empty_count,
+            "active_path_first_update_after_goal_sec": avg(first_active),
+            "travel_traj_first_update_after_goal_sec": avg(first_travel),
+            "uav_idle_due_to_no_path_duration_sec": self.uav_idle_due_to_no_path_duration,
+            "no_path_blacklist_count": self.no_path_blacklist_count,
+            "goal_reselect_due_to_no_path_count": self.goal_reselect_due_to_no_path_count,
+        }
+
     def coverage_gain(self) -> float:
         if not self.coverage_series:
             return 0.0
         return self.coverage() - self.coverage_series[0][1]
 
     def sample(self) -> None:
+        self.update_no_path_idle()
         row = {
             "time_sec": self.elapsed(),
             "coverage_proxy": self.coverage(),
@@ -346,13 +472,11 @@ class RouteRationalityRecorder(Node):
             "main_route_issue": self.main_issue(),
         }
         self.samples.append(row)
-        print(
-            "P2H_ROUTE_PROGRESS "
-            + " ".join(f"{k}={v:.3f}" if isinstance(v, float) else f"{k}={v}" for k, v in row.items()),
-            flush=True,
-        )
+        marker = "P2I_ROUTE_PROGRESS" if "p2i" in self.args.run_id.lower() else "P2H_ROUTE_PROGRESS"
+        print(marker + " " + " ".join(f"{k}={v:.3f}" if isinstance(v, float) else f"{k}={v}" for k, v in row.items()), flush=True)
 
     def result(self) -> Dict:
+        self.update_no_path_idle()
         coverage_gain = self.coverage_gain()
         selected_unique = len({(round(p[0], 1), round(p[1], 1), round(p[2], 1)) for _t, p in self.goal_points})
         net = dist(self.odom_start, self.odom_last) if self.odom_start and self.odom_last else 0.0
@@ -392,20 +516,43 @@ class RouteRationalityRecorder(Node):
             "route_tortuosity": self.odom_total / max(net, 1e-6),
             "active_path_update_count": self.active_path_update_count,
             "position_cmd_update_count": self.position_cmd_update_count,
+            "travel_traj_update_count": self.travel_traj_update_count,
             "frontier_candidate_count_end": self.frontier_candidate_counts[-1] if self.frontier_candidate_counts else 0,
             "frontier_viewpoint_count_end": self.frontier_viewpoint_counts[-1] if self.frontier_viewpoint_counts else 0,
             "main_route_issue": self.main_issue(),
         }
+        data.update(self.no_path_metrics())
         return data
+
+    def update_no_path_idle(self) -> None:
+        now = self.elapsed()
+        no_path = False
+        if self.current_goal_record is not None:
+            active_first = self.current_goal_record.get("active_path_first")
+            travel_first = self.current_goal_record.get("travel_traj_first")
+            age = now - float(self.current_goal_record["time"])
+            no_path = age > 5.0 and active_first is None and travel_first is None
+        recent = [(t, p) for t, p in self.odom_points if now - t <= 20.0]
+        idle = True
+        if len(recent) >= 2:
+            idle = dist(recent[0][1], recent[-1][1]) < 0.2
+        if no_path and idle:
+            if self.uav_idle_due_to_no_path_start is None:
+                self.uav_idle_due_to_no_path_start = now
+            self.uav_idle_due_to_no_path_duration = max(self.uav_idle_due_to_no_path_duration, now - self.uav_idle_due_to_no_path_start)
+        else:
+            self.uav_idle_due_to_no_path_start = None
 
     def run(self) -> Dict:
         last_sample = time.time()
-        while rclpy.ok() and time.time() < self.end_wall:
+        indefinite = self.args.duration <= 0.0
+        while rclpy.ok() and (indefinite or time.time() < self.end_wall):
             rclpy.spin_once(self, timeout_sec=0.2)
             if time.time() - last_sample >= self.args.progress_interval:
                 last_sample = time.time()
                 self.sample()
-        self.sample()
+        if not indefinite:
+            self.sample()
         return self.result()
 
 
@@ -438,10 +585,14 @@ def main() -> int:
     rclpy.init()
     node = RouteRationalityRecorder(args)
     try:
-        metrics = node.run()
+        try:
+            metrics = node.run()
+        except KeyboardInterrupt:
+            metrics = node.result()
         write_outputs(Path(args.output_root), args.run_id, metrics, node.samples, node.events)
         result = "PASS" if metrics["duration_sec"] >= 290.0 and metrics["coverage_proxy_gain"] > 0.05 else "PARTIAL"
-        print("P2H_ROUTE_RATIONALITY_RECORDER_RESULT")
+        marker = "P2I_ROUTE_RATIONALITY_RECORDER_RESULT" if "p2i" in args.run_id.lower() else "P2H_ROUTE_RATIONALITY_RECORDER_RESULT"
+        print(marker)
         print(f"run_id={args.run_id}")
         for key in [
             "duration_sec",
@@ -455,6 +606,11 @@ def main() -> int:
             "route_revisit_ratio",
             "route_tortuosity",
             "active_path_endpoint_to_goal_distance_avg",
+            "goal_without_path_count",
+            "goal_to_path_timeout_count",
+            "active_goal_without_active_path_max_duration_sec",
+            "active_goal_without_travel_traj_max_duration_sec",
+            "uav_idle_due_to_no_path_duration_sec",
             "main_route_issue",
         ]:
             print(f"{key}={metrics.get(key)}")

@@ -4,7 +4,7 @@ from typing import List, Optional, Tuple
 
 import rclpy
 from geometry_msgs.msg import PoseStamped
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, Path as RosPath
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2
@@ -58,6 +58,10 @@ class ExplorationManagerLite(Node):
         self.max_escape_candidates = int(self.declare_parameter("max_escape_candidates", 250).value)
         self.escape_cooldown_sec = float(self.declare_parameter("escape_cooldown_sec", 15.0).value)
         self.enable_frontier_point_escape = bool(self.declare_parameter("enable_frontier_point_escape", True).value)
+        self.goal_to_path_timeout_sec = float(self.declare_parameter("goal_to_path_timeout_sec", 15.0).value)
+        self.goal_without_path_retire_sec = float(self.declare_parameter("goal_without_path_retire_sec", 15.0).value)
+        self.no_path_blacklist_ttl_sec = float(self.declare_parameter("no_path_blacklist_ttl_sec", 90.0).value)
+        self.no_path_region_radius = float(self.declare_parameter("no_path_region_radius", 2.0).value)
         self.active_goal: Optional[PoseStamped] = None
         self.pending_best: Optional[PoseStamped] = None
         self.pending_best_score = 0.0
@@ -130,6 +134,17 @@ class ExplorationManagerLite(Node):
         self.path_status_reason = "none"
         self.path_status_goal_key = "UNKNOWN"
         self.path_endpoint_to_goal_distance = -1.0
+        self.no_path_watchdog_enabled = True
+        self.no_path_timeout_count = 0
+        self.no_path_blacklist_count = 0
+        self.goal_reselect_due_to_no_path_count = 0
+        self.no_path_timeout_reported = False
+        self.no_path_waiting_reported_sec = -999.0
+        self.last_active_path_update_sec = -999.0
+        self.last_travel_traj_update_sec = -999.0
+        self.active_path_points = 0
+        self.travel_traj_points = 0
+        self.no_path_blacklisted_regions = {}
         self.goal_jump_reject_count = 0
         self.goal_smoothing_applied_count = 0
         self.goal_jump_count = 0
@@ -139,6 +154,8 @@ class ExplorationManagerLite(Node):
         self.create_subscription(PoseStamped, "/fuel/p11_lite/best_viewpoint", self._best_cb, 10)
         self.create_subscription(String, "/fuel/p11_lite/frontier_status", self._frontier_status_cb, 10)
         self.create_subscription(String, "/fuel/p11_lite/goal_to_path_status", self._goal_to_path_status_cb, 10)
+        self.create_subscription(RosPath, "/fuel/p10_lite/active_path", lambda msg: self._path_cb("active_path", msg), 10)
+        self.create_subscription(RosPath, "/planning/travel_traj", lambda msg: self._path_cb("travel_traj", msg), 10)
         self.create_subscription(Odometry, "/odom", self._odom_cb, 20)
         self.create_subscription(PointCloud2, "/fuel/p11_lite/frontier_viewpoints", self._frontier_viewpoints_cb, 10)
         self.create_subscription(PointCloud2, "/fuel/p11_lite/frontier_candidates_raw", self._frontier_candidates_cb, 10)
@@ -196,6 +213,18 @@ class ExplorationManagerLite(Node):
             self.path_infeasible_count += 1
         else:
             self.path_infeasible_start_sec = None
+
+    def _path_cb(self, source: str, msg: RosPath) -> None:
+        points = len(msg.poses)
+        now = self._now()
+        if source == "active_path":
+            self.active_path_points = points
+            if points > 0:
+                self.last_active_path_update_sec = now
+        elif source == "travel_traj":
+            self.travel_traj_points = points
+            if points > 0:
+                self.last_travel_traj_update_sec = now
 
     @staticmethod
     def _extract_score(msg: PoseStamped) -> float:
@@ -287,6 +316,90 @@ class ExplorationManagerLite(Node):
         self.goal_retire_event_count += 1
         self.goal_retire_reasons[reason] = self.goal_retire_reasons.get(reason, 0) + 1
         self._publish_goal_event("RETIRE_GOAL", self.active_goal, reason)
+
+    def _no_path_region_key(self, point: Point) -> Tuple[int, int]:
+        res = max(0.5, self.no_path_region_radius)
+        return int(math.floor(point[0] / res)), int(math.floor(point[1] / res))
+
+    def _prune_no_path_blacklist(self, now: float) -> None:
+        ttl = max(1.0, self.no_path_blacklist_ttl_sec)
+        self.no_path_blacklisted_regions = {
+            region: stamp for region, stamp in self.no_path_blacklisted_regions.items() if now - stamp <= ttl
+        }
+
+    def _is_no_path_blacklisted(self, point: Point, now: Optional[float] = None) -> bool:
+        now = self._now() if now is None else now
+        self._prune_no_path_blacklist(now)
+        return self._no_path_region_key(point) in self.no_path_blacklisted_regions
+
+    def _active_goal_without_active_path_duration(self, now: float) -> float:
+        if self.active_goal is None:
+            return 0.0
+        return 0.0 if self.last_active_path_update_sec >= self.goal_start_sec else max(0.0, now - self.goal_start_sec)
+
+    def _active_goal_without_travel_traj_duration(self, now: float) -> float:
+        if self.active_goal is None:
+            return 0.0
+        return 0.0 if self.last_travel_traj_update_sec >= self.goal_start_sec else max(0.0, now - self.goal_start_sec)
+
+    def _no_path_waiting(self, now: float) -> bool:
+        if self.active_goal is None:
+            return False
+        return (
+            self._active_goal_without_active_path_duration(now) >= self.goal_to_path_timeout_sec
+            and self._active_goal_without_travel_traj_duration(now) >= self.goal_to_path_timeout_sec
+        )
+
+    def _handle_no_path_timeout(self, now: float) -> bool:
+        if self.active_goal is None:
+            return False
+        active_missing = self._active_goal_without_active_path_duration(now)
+        travel_missing = self._active_goal_without_travel_traj_duration(now)
+        waiting = active_missing >= self.goal_to_path_timeout_sec and travel_missing >= self.goal_to_path_timeout_sec
+        if waiting and not self.no_path_timeout_reported:
+            self.no_path_timeout_count += 1
+            self.no_path_timeout_reported = True
+            self._publish_goal_event(
+                "GOAL_TO_PATH_TIMEOUT",
+                self.active_goal,
+                "NO_PATH_TIMEOUT",
+                f"wait_sec={max(active_missing, travel_missing):.3f}",
+            )
+        if waiting and now - self.no_path_waiting_reported_sec >= 2.0:
+            self.no_path_waiting_reported_sec = now
+            self._publish_goal_event(
+                "ACTIVE_PATH_MISSING",
+                self.active_goal,
+                "NO_PATH_WAITING",
+                f"duration_sec={active_missing:.3f} travel_traj_missing_sec={travel_missing:.3f}",
+            )
+        if active_missing < self.goal_without_path_retire_sec or travel_missing < self.goal_without_path_retire_sec:
+            return False
+        point = self._pose_point(self.active_goal)
+        region = self._no_path_region_key(point)
+        self.no_path_blacklisted_regions[region] = now
+        self.no_path_blacklist_count += 1
+        old_goal = self.active_goal
+        self._publish_goal_event("GOAL_RETIRED", old_goal, "NO_PATH_TIMEOUT")
+        self._publish_goal_event(
+            "GOAL_BLACKLIST",
+            old_goal,
+            "NO_PATH_TIMEOUT",
+            f"ttl={self.no_path_blacklist_ttl_sec:.1f} region={region}",
+        )
+        self._retire_active_goal("NO_PATH_TIMEOUT", now)
+        if self._pending_is_usable():
+            self.goal_reselect_due_to_no_path_count += 1
+            self._publish_goal_event("GOAL_RESELECT", self.pending_best, "NO_PATH_TIMEOUT")
+            self._switch_to_pending("NO_PATH_TIMEOUT")
+        elif self._switch_to_escape_goal("NO_PATH_TIMEOUT"):
+            self.goal_reselect_due_to_no_path_count += 1
+            self._publish_goal_event("GOAL_RESELECT", self.active_goal, "NO_PATH_TIMEOUT")
+        else:
+            self.active_goal = None
+            self.reason = "NO_PATH_TIMEOUT_waiting_for_new_viewpoint"
+            self.switch_reason = self.reason
+        return True
 
     def _recently_retired(self, point: Point, now: Optional[float] = None) -> bool:
         now = self._now() if now is None else now
@@ -399,9 +512,16 @@ class ExplorationManagerLite(Node):
         self.last_switch_reason = reason
         self.switch_reason = reason
         self.active_goal_key = self._goal_key(point)
+        self.no_path_timeout_reported = False
+        self.no_path_waiting_reported_sec = -999.0
+        self.last_active_path_update_sec = -999.0
+        self.last_travel_traj_update_sec = -999.0
+        self.active_path_points = 0
+        self.travel_traj_points = 0
         self._remember_goal(goal, now)
         self._last_progress_sec = now
-        self._publish_goal_event("NEW_GOAL", goal, reason, f"source={source} score={score:.3f}")
+        self._publish_goal_event("GOAL_SELECTED", goal, reason, f"source={source} score={score:.3f}")
+        self._publish_goal_event("GOAL_TO_PATH_REQUEST", goal, reason, f"goal_id={self.active_goal_key}")
 
     def _switch_to_pending(self, reason: str) -> None:
         if not self._pending_is_usable():
@@ -437,6 +557,9 @@ class ExplorationManagerLite(Node):
             if math.dist(odom_xyz, pending_xyz) <= self.min_goal_distance:
                 return False
         if self._recently_retired(pending_xyz):
+            return False
+        if self._is_no_path_blacklisted(pending_xyz):
+            self.last_goal_event_reason = "NO_PATH_BLACKLIST"
             return False
         return True
 
@@ -582,7 +705,7 @@ class ExplorationManagerLite(Node):
         return self._make_goal(point, score), source
 
     def _switch_to_escape_goal(self, reason: str) -> bool:
-        bypass_rate_limit = reason in ("coverage_stall", "no_progress")
+        bypass_rate_limit = reason in ("coverage_stall", "no_progress", "NO_PATH_TIMEOUT")
         if not bypass_rate_limit and not self._rate_limit_allows_switch(self._now()):
             self.switch_blocked_by_rate_count += 1
             self.reason = f"{reason}_rate_limited"
@@ -693,6 +816,7 @@ class ExplorationManagerLite(Node):
     def _tick(self) -> None:
         now = self._now()
         self._trim_histories(now)
+        self._prune_no_path_blacklist(now)
         self._update_progress(now)
         goal_age = 0.0 if self.active_goal is None else now - self.goal_start_sec
         goal_distance = self._active_goal_distance()
@@ -716,7 +840,10 @@ class ExplorationManagerLite(Node):
         self.goal_hold_active = False
         self.region_hold_active = False
         self.region_stall_detected = now - self._last_progress_sec >= self.region_stall_timeout_sec
-        if self.active_goal is None:
+        no_path_handled = self._handle_no_path_timeout(now)
+        if no_path_handled:
+            self.goal_hold_active = True
+        elif self.active_goal is None:
             self._switch_to_pending("new_best_viewpoint")
         elif path_infeasible_expired:
             self._retire_active_goal("path_infeasible", now)
@@ -794,6 +921,8 @@ class ExplorationManagerLite(Node):
 
         status = String()
         goal_age = 0.0 if self.active_goal is None else now - self.goal_start_sec
+        active_path_missing_sec = self._active_goal_without_active_path_duration(now)
+        travel_traj_missing_sec = self._active_goal_without_travel_traj_duration(now)
         status.data = (
             "REAL_FLIGHT_COMMAND=false "
             f"active_goal={'true' if self.active_goal is not None else 'false'} "
@@ -812,6 +941,17 @@ class ExplorationManagerLite(Node):
             f"path_status_reason={self.path_status_reason} "
             f"path_status_goal_key={self.path_status_goal_key} "
             f"path_endpoint_to_goal_distance={self.path_endpoint_to_goal_distance:.3f} "
+            f"no_path_watchdog_enabled={'true' if self.no_path_watchdog_enabled else 'false'} "
+            f"goal_to_path_timeout_sec={self.goal_to_path_timeout_sec:.3f} "
+            f"goal_without_path_retire_sec={self.goal_without_path_retire_sec:.3f} "
+            f"active_path_points={self.active_path_points} "
+            f"travel_traj_points={self.travel_traj_points} "
+            f"active_goal_without_active_path_duration={active_path_missing_sec:.3f} "
+            f"active_goal_without_travel_traj_duration={travel_traj_missing_sec:.3f} "
+            f"goal_to_path_timeout_count={self.no_path_timeout_count} "
+            f"no_path_blacklist_count={self.no_path_blacklist_count} "
+            f"no_path_blacklisted_region_count={len(self.no_path_blacklisted_regions)} "
+            f"goal_reselect_due_to_no_path_count={self.goal_reselect_due_to_no_path_count} "
             f"goal_switch_count={self.goal_switch_count} "
             f"goal_retire_event_count={self.goal_retire_event_count} "
             f"goal_retire_reasons={self.goal_retire_reasons} "

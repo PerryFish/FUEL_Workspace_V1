@@ -1,0 +1,15 @@
+# P2H Route Rationality Analysis
+
+- main_route_issue: GOAL_TO_PATH_TIMEOUT
+- coverage_proxy_gain: 0.15248122515093504
+- coverage_gain_per_meter: 0.001956616754180978
+- odom_total_distance: 77.93106382489415
+- selected_goal_unique_count: 27
+- path_length_regret_avg: -2.4483595027917473
+- path_length_regret_max: 4.819330834823785
+- nearest_frontier_ignored_count: 0
+- near_high_gain_candidate_ignored_count: 0
+- route_revisit_ratio: 0.8677248677248677
+- route_tortuosity: 6.107834695317354
+- active_path_endpoint_to_goal_distance_avg: 2.0935403231009504e-17
+- active_path_endpoint_to_goal_distance_max: 4.440892098500626e-16

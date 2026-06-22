@@ -31,7 +31,7 @@ class FrontierViewpointLite(Node):
         self.revisit_penalty = float(self.declare_parameter("revisit_penalty", 8.0).value)
         self.visited_region_resolution = float(self.declare_parameter("visited_region_resolution", 2.0).value)
         self.revisit_penalty_weight = float(self.declare_parameter("revisit_penalty_weight", 2.0).value)
-        self.recent_revisit_penalty_weight = float(self.declare_parameter("recent_revisit_penalty_weight", 3.0).value)
+        self.recent_revisit_penalty_weight = float(self.declare_parameter("recent_revisit_penalty_weight", 3.5).value)
         self.visited_region_memory_sec = float(self.declare_parameter("visited_region_memory_sec", 180.0).value)
         self.trail_exclusion_radius = float(self.declare_parameter("trail_exclusion_radius", 1.5).value)
         self.region_task_resolution = float(self.declare_parameter("region_task_resolution", 4.0).value)
@@ -41,10 +41,10 @@ class FrontierViewpointLite(Node):
         self.low_clearance_penalty_weight = float(self.declare_parameter("low_clearance_penalty_weight", 2.0).value)
         self.information_gain_weight = float(self.declare_parameter("information_gain_weight", 3.0).value)
         self.novelty_weight = float(self.declare_parameter("novelty_weight", 2.0).value)
-        self.distance_cost_weight = float(self.declare_parameter("distance_cost_weight", 1.35).value)
+        self.distance_cost_weight = float(self.declare_parameter("distance_cost_weight", 1.45).value)
         self.path_cost_normalizer = float(self.declare_parameter("path_cost_normalizer", 8.0).value)
         self.near_frontier_bonus = float(self.declare_parameter("near_frontier_bonus", 0.25).value)
-        self.new_region_bonus = float(self.declare_parameter("new_region_bonus", 0.35).value)
+        self.new_region_bonus = float(self.declare_parameter("new_region_bonus", 0.45).value)
         self.active_region_score_bonus = float(self.declare_parameter("active_region_score_bonus", 0.35).value)
         self.non_preferred_region_penalty = float(self.declare_parameter("non_preferred_region_penalty", 0.10).value)
         self.boundary_follow_penalty_weight = float(self.declare_parameter("boundary_follow_penalty_weight", 1.2).value)
@@ -211,7 +211,9 @@ class FrontierViewpointLite(Node):
             return
         count = self.unreachable_goal_fail_counts.get(key, 0) + 1
         self.unreachable_goal_fail_counts[key] = count
-        if count < max(1, self.unreachable_path_fail_threshold):
+        hard_endpoint_outlier = endpoint_distance > 5.0
+        endpoint_outlier = endpoint_distance > 2.0
+        if count < max(1, self.unreachable_path_fail_threshold) and not (hard_endpoint_outlier or endpoint_outlier):
             return
         now = self.get_clock().now().nanoseconds / 1e9
         self._prune_unreachable_blacklist(now)

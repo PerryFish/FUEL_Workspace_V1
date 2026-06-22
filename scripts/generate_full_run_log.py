@@ -8,6 +8,11 @@ import time
 from pathlib import Path
 from typing import Iterable, List
 
+try:
+    from fuel_run_commands_common import RUN_COMMANDS_MARKDOWN
+except ImportError:  # pragma: no cover
+    RUN_COMMANDS_MARKDOWN = ""
+
 
 IMPORTANT_TOPICS = [
     "/odom",
@@ -40,6 +45,7 @@ METRIC_NAMES = {
     "path_feasibility.json",
     "traj_server_analysis.json",
     "stuck_analysis.json",
+    "route_rationality.json",
 }
 
 
@@ -215,9 +221,8 @@ def main() -> int:
         write_codeblock(f, "text", run(["bash", "-lc", "ls -lh reports/latest_p2g_debug_package.tar.gz reports/latest_p2f_debug_package.tar.gz reports/latest_p2d_debug_package.tar.gz 2>/dev/null || true"], workspace))
 
         f.write("## 12. Visual Re-run Commands\n")
-        f.write("Manual persistent visual demo:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/run_with_log.sh visual_manual ./scripts/run_manual_visual_demo_persistent.sh\n```\n\n")
-        f.write("Coverage visual diagnostic demo:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/run_with_log.sh p2g_visual_coverage_300s ./scripts/run_p2g_visual_coverage_300s.sh\n```\n\n")
-        f.write("Clean all FUEL/RViz processes:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/kill_fuel.sh\n```\n\n")
+        f.write(RUN_COMMANDS_MARKDOWN or "## Run Commands\n\nUNAVAILABLE\n")
+        f.write("\n")
 
         f.write("## 13. Final Diagnosis\n")
         f.write(f"- Command exit code: {args.exit_code}.\n")

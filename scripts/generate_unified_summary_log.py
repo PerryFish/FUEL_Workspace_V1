@@ -9,6 +9,11 @@ import time
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+try:
+    from fuel_run_commands_common import RUN_COMMANDS_MARKDOWN
+except ImportError:  # pragma: no cover
+    RUN_COMMANDS_MARKDOWN = ""
+
 
 IMPORTANT_TOPICS = [
     "/odom",
@@ -72,6 +77,33 @@ METRIC_KEYS = [
     "main_chain_break",
     "main_stuck_cause",
     "main_coverage_blocker",
+    "main_route_issue",
+    "coverage_gain_per_meter",
+    "selected_goal_unique_count",
+    "path_length_regret_avg",
+    "path_length_regret_max",
+    "near_high_gain_candidate_ignored_count",
+    "route_revisit_ratio",
+    "route_tortuosity",
+    "goal_selected_count",
+    "goal_without_path_count",
+    "goal_without_path_ratio",
+    "goal_to_path_latency_avg_sec",
+    "goal_to_path_latency_max_sec",
+    "goal_to_path_timeout_count",
+    "goal_to_path_timeout_max_duration_sec",
+    "active_goal_without_active_path_max_duration_sec",
+    "active_goal_without_travel_traj_max_duration_sec",
+    "path_missing_after_goal_count",
+    "path_missing_after_goal_max_duration_sec",
+    "path_generation_fail_count",
+    "path_generation_fail_reasons",
+    "active_path_empty_count",
+    "active_path_first_update_after_goal_sec",
+    "travel_traj_first_update_after_goal_sec",
+    "uav_idle_due_to_no_path_duration_sec",
+    "no_path_blacklist_count",
+    "goal_reselect_due_to_no_path_count",
 ]
 
 
@@ -147,6 +179,7 @@ def collect_metrics(workspace: Path, since: float, task_name: str, raw_text: str
             "reports/p2*_metrics/*/motion_chain.json",
             "reports/p2*_metrics/*/coverage_completion.json",
             "reports/p2*_metrics/*/frontier_reachability.json",
+            "reports/p2*_metrics/*/route_rationality.json",
             "reports/p2*_metrics/*/metrics.json",
             "reports/p2*_metrics/*/goal_lifecycle.json",
             "reports/p2*_metrics/*/stuck_analysis.json",
@@ -170,6 +203,18 @@ def collect_metrics(workspace: Path, since: float, task_name: str, raw_text: str
                 json_candidates.append(path)
                 matched_by = "task_name"
     if not json_candidates:
+        raw_metrics = parse_metrics_from_raw(raw_text)
+        if raw_metrics:
+            for key, value in raw_metrics.items():
+                if key in metrics:
+                    metrics[key] = value
+            source = {
+                "metrics_source": "RAW_LOG_RECORDER_RESULT",
+                "metrics_source_path": str(raw_log_hint(raw_text)),
+                "metrics_source_reason": "parsed P2H/P2I recorder result directly from raw log",
+                "matched_by": "raw_log_reference",
+            }
+            return metrics, source
         return metrics, source
     for path in reversed(json_candidates):
         data = load_json(path)
@@ -199,6 +244,48 @@ def collect_metrics(workspace: Path, since: float, task_name: str, raw_text: str
         "matched_by": matched_by,
     }
     return metrics, source
+
+
+def raw_log_hint(raw_text: str) -> str:
+    ids = run_ids_from_raw(raw_text)
+    return ids[-1] if ids else "raw_log"
+
+
+def parse_metrics_from_raw(raw_text: str) -> Dict[str, Any]:
+    markers = [
+        "P2H_ROUTE_RATIONALITY_RECORDER_RESULT",
+        "P2I_ROUTE_RATIONALITY_RECORDER_RESULT",
+        "P2G_FRONTIER_REACHABILITY_RECORDER_RESULT",
+        "P2F_COVERAGE_COMPLETION_RECORDER_RESULT",
+    ]
+    if not any(marker in raw_text for marker in markers):
+        return {}
+    parsed: Dict[str, Any] = {}
+    active = False
+    for line in raw_text.splitlines():
+        if any(marker in line for marker in markers):
+            active = True
+            continue
+        if active and re.match(r"^[A-Za-z0-9_]+=", line):
+            key, value = line.split("=", 1)
+            if key in METRIC_KEYS:
+                parsed[key] = coerce_value(value.strip())
+        elif active and line.startswith("P2") and "RESULT" in line:
+            continue
+        elif active and line.strip() == "":
+            active = False
+    return parsed
+
+
+def coerce_value(value: str) -> Any:
+    if value in ("true", "false"):
+        return value
+    try:
+        if re.match(r"^-?\d+$", value):
+            return int(value)
+        return float(value)
+    except ValueError:
+        return value
 
 
 def infer_result(exit_code: int, raw_text: str, metrics: Dict[str, Any]) -> str:
@@ -320,11 +407,10 @@ def main() -> int:
         f.write("\n## Diagnosis\n")
         for line in diagnosis:
             f.write(f"- {line}\n")
-        f.write("\n## Visual Re-run Commands\n")
-        f.write("Manual persistent visual demo:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/run_with_log.sh visual_manual ./scripts/run_manual_visual_demo_persistent.sh\n```\n\n")
-        f.write("Coverage visual diagnostic demo:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/run_with_log.sh p2g_visual_coverage_300s ./scripts/run_p2g_visual_coverage_300s.sh\n```\n\n")
-        f.write("Clean all FUEL/RViz processes:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\n./scripts/kill_fuel.sh\n```\n\n")
-        f.write("Latest debug package:\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\nls -lh reports/latest_p2f_debug_package.tar.gz reports/latest_p2e_debug_package.tar.gz reports/latest_p2d_debug_package.tar.gz reports/latest_p2c_debug_package.tar.gz 2>/dev/null || true\n```\n\n")
+        f.write("\n")
+        f.write(RUN_COMMANDS_MARKDOWN or "## Run Commands\n\nUNAVAILABLE\n")
+        f.write("\n")
+        f.write("### Latest Debug Packages\n\n```bash\ncd /home/nuaa/ZHY/FUEL_PLANNER_V3\nls -lh reports/latest_p2i_debug_package.tar.gz reports/latest_p2h_debug_package.tar.gz reports/latest_p2g_debug_package.tar.gz reports/latest_p2f_debug_package.tar.gz 2>/dev/null || true\n```\n\n")
         f.write("## Next Action\n")
         if metrics.get("main_coverage_blocker") not in ("UNAVAILABLE", None, ""):
             f.write(f"- Investigate/fix `{metrics.get('main_coverage_blocker')}` with the smallest targeted change.\n")
