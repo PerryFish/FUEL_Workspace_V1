@@ -1,0 +1,49 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    map:
+      frame_id: "map"
+      resolution: 0.2
+      inflation_radius: 0.4
+      local_update_range_x: 8.0
+      local_update_range_y: 8.0
+      local_update_range_z: 3.0
+      min_x: -10.0
+      min_y: -10.0
+      min_z: 0.5
+      max_x: 10.0
+      max_y: 10.0
+      max_z: 3.0
+
+    plan_env:
+      enable_real_plan_env: false
+      enable_esdf: false
+      enable_inflation: true
+      enable_frontier_extraction: true
+      debug_publish_rate: 2.0
+
+fuel_mvp_node:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    map:
+      frame_id: "map"
+      resolution: 0.2
+      inflation_radius: 0.4
+      local_update_range_x: 8.0
+      local_update_range_y: 8.0
+      local_update_range_z: 3.0
+      min_x: -10.0
+      min_y: -10.0
+      min_z: 0.5
+      max_x: 10.0
+      max_y: 10.0
+      max_z: 3.0
+
+    plan_env:
+      enable_real_plan_env: false
+      enable_esdf: false
+      enable_inflation: true
+      enable_frontier_extraction: true
+      debug_publish_rate: 2.0

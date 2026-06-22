@@ -1,0 +1,3180 @@
+{
+  "run_id": "p2c_after_office_300s_20260621_173224",
+  "duration_sec": 304.621306180954,
+  "coverage_proxy_is_not_exact_metric": true,
+  "odom_msg_count": 26914,
+  "uav_start_position": [
+    0.6583592135001274,
+    -0.6708203932499379,
+    1.2
+  ],
+  "uav_end_position": [
+    3.0593816956162434,
+    0.20058392130040623,
+    1.2
+  ],
+  "uav_total_distance": 2.663221391736425,
+  "uav_net_displacement": 2.5542620145638915,
+  "max_no_motion_duration_sec": 285.744916677475,
+  "stuck_event_count": 54,
+  "stuck_events": [
+    {
+      "time_sec": 1.774468183517456,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        0.6583592135001274,
+        -0.6708203932499379,
+        1.2
+      ],
+      "goal": [
+        3.0593816956162483,
+        0.20058392130040592,
+        1.2
+      ],
+      "frontier_count": 119,
+      "coverage_proxy": 0.10035340892357532,
+      "trajectory_count": 24
+    },
+    {
+      "time_sec": 6.774687767028809,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        0.6583592135001274,
+        -0.6708203932499379,
+        1.2
+      ],
+      "goal": [
+        3.0593816956162483,
+        0.20058392130040592,
+        1.2
+      ],
+      "frontier_count": 119,
+      "coverage_proxy": 0.10035340892357532,
+      "trajectory_count": 134
+    },
+    {
+      "time_sec": 11.776453971862793,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        2.7339095068952877,
+        0.21169653771658847,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 115,
+      "coverage_proxy": 0.10808422912678545,
+      "trajectory_count": 244
+    },
+    {
+      "time_sec": 17.275497674942017,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.058859798736652,
+        0.20061997187844532,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 366
+    },
+    {
+      "time_sec": 22.2758309841156,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059380571681999,
+        0.2005839989373509,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 476
+    },
+    {
+      "time_sec": 27.78149938583374,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816943545007,
+        0.20058392138756248,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 596
+    },
+    {
+      "time_sec": 30.412303686141968,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695566623,
+        0.20058392130383382,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 654
+    },
+    {
+      "time_sec": 32.51188826560974,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695612505,
+        0.20058392130066455,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 700
+    },
+    {
+      "time_sec": 33.27660393714905,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956147273,
+        0.20058392130051103,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 718
+    },
+    {
+      "time_sec": 35.4161536693573,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616142,
+        0.2005839213004133,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 754
+    },
+    {
+      "time_sec": 38.28109908103943,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 812
+    },
+    {
+      "time_sec": 40.444852352142334,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 854
+    },
+    {
+      "time_sec": 43.77584362030029,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 922
+    },
+    {
+      "time_sec": 45.446218729019165,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 954
+    },
+    {
+      "time_sec": 49.27555465698242,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1032
+    },
+    {
+      "time_sec": 50.44741988182068,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1054
+    },
+    {
+      "time_sec": 52.512043952941895,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1096
+    },
+    {
+      "time_sec": 54.279624462127686,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1132
+    },
+    {
+      "time_sec": 55.46636939048767,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1155
+    },
+    {
+      "time_sec": 59.7757134437561,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1242
+    },
+    {
+      "time_sec": 60.46910357475281,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1256
+    },
+    {
+      "time_sec": 64.78000330924988,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1342
+    },
+    {
+      "time_sec": 65.46929359436035,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1356
+    },
+    {
+      "time_sec": 70.2751133441925,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1454
+    },
+    {
+      "time_sec": 70.47057151794434,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1458
+    },
+    {
+      "time_sec": 72.51205778121948,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1498
+    },
+    {
+      "time_sec": 75.27572822570801,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1554
+    },
+    {
+      "time_sec": 75.47467851638794,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1560
+    },
+    {
+      "time_sec": 80.4776177406311,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1660
+    },
+    {
+      "time_sec": 80.77591824531555,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1666
+    },
+    {
+      "time_sec": 85.47992444038391,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1762
+    },
+    {
+      "time_sec": 85.78150296211243,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1768
+    },
+    {
+      "time_sec": 90.48174285888672,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1864
+    },
+    {
+      "time_sec": 91.28205394744873,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1880
+    },
+    {
+      "time_sec": 92.51505994796753,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1904
+    },
+    {
+      "time_sec": 95.48259854316711,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1964
+    },
+    {
+      "time_sec": 96.77920198440552,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1990
+    },
+    {
+      "time_sec": 100.51139736175537,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2066
+    },
+    {
+      "time_sec": 101.78089094161987,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2092
+    },
+    {
+      "time_sec": 105.51207971572876,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2168
+    },
+    {
+      "time_sec": 107.28131818771362,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2204
+    },
+    {
+      "time_sec": 110.51421928405762,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2268
+    },
+    {
+      "time_sec": 112.5450668334961,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2310
+    },
+    {
+      "time_sec": 112.77695274353027,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2316
+    },
+    {
+      "time_sec": 115.51537537574768,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2370
+    },
+    {
+      "time_sec": 117.77852249145508,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2416
+    },
+    {
+      "time_sec": 120.54432129859924,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2472
+    },
+    {
+      "time_sec": 122.7801661491394,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2518
+    },
+    {
+      "time_sec": 125.54571080207825,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2572
+    },
+    {
+      "time_sec": 128.27911758422852,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2630
+    },
+    {
+      "time_sec": 130.54688954353333,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2674
+    },
+    {
+      "time_sec": 132.54757642745972,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2714
+    },
+    {
+      "time_sec": 133.7761435508728,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2742
+    },
+    {
+      "time_sec": 135.56550216674805,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2777
+    },
+    {
+      "time_sec": 138.77939081192017,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2842
+    },
+    {
+      "time_sec": 140.56602501869202,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2880
+    },
+    {
+      "time_sec": 143.7815718650818,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2944
+    },
+    {
+      "time_sec": 145.56704449653625,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2979
+    },
+    {
+      "time_sec": 149.28002905845642,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3056
+    },
+    {
+      "time_sec": 150.57151460647583,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3082
+    },
+    {
+      "time_sec": 152.56380009651184,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3121
+    },
+    {
+      "time_sec": 154.28213167190552,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3156
+    },
+    {
+      "time_sec": 155.57885241508484,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3184
+    },
+    {
+      "time_sec": 159.7784914970398,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3268
+    },
+    {
+      "time_sec": 160.5789511203766,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3284
+    },
+    {
+      "time_sec": 164.78127908706665,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3370
+    },
+    {
+      "time_sec": 165.57899618148804,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3386
+    },
+    {
+      "time_sec": 170.28009676933289,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3482
+    },
+    {
+      "time_sec": 170.57977747917175,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3488
+    },
+    {
+      "time_sec": 172.56473422050476,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3527
+    },
+    {
+      "time_sec": 175.58090209960938,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3588
+    },
+    {
+      "time_sec": 175.77670741081238,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3592
+    },
+    {
+      "time_sec": 180.61147260665894,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3690
+    },
+    {
+      "time_sec": 181.2798821926117,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3704
+    },
+    {
+      "time_sec": 185.6131489276886,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3792
+    },
+    {
+      "time_sec": 186.77921772003174,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3816
+    },
+    {
+      "time_sec": 190.61416149139404,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3892
+    },
+    {
+      "time_sec": 191.78124403953552,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3918
+    },
+    {
+      "time_sec": 192.56542301177979,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3933
+    },
+    {
+      "time_sec": 195.61449646949768,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3994
+    },
+    {
+      "time_sec": 197.2785713672638,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4028
+    },
+    {
+      "time_sec": 200.64605808258057,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4096
+    },
+    {
+      "time_sec": 202.77952003479004,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4140
+    },
+    {
+      "time_sec": 205.64769434928894,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4198
+    },
+    {
+      "time_sec": 207.78001856803894,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4242
+    },
+    {
+      "time_sec": 210.6510443687439,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4298
+    },
+    {
+      "time_sec": 212.56627249717712,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4339
+    },
+    {
+      "time_sec": 213.2782862186432,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4354
+    },
+    {
+      "time_sec": 215.66435313224792,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4401
+    },
+    {
+      "time_sec": 218.77992701530457,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4464
+    },
+    {
+      "time_sec": 220.66483283042908,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4503
+    },
+    {
+      "time_sec": 223.7806851863861,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4566
+    },
+    {
+      "time_sec": 225.66574788093567,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4603
+    },
+    {
+      "time_sec": 229.2778046131134,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4678
+    },
+    {
+      "time_sec": 230.66804265975952,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4706
+    },
+    {
+      "time_sec": 232.56801676750183,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4744
+    },
+    {
+      "time_sec": 234.28159499168396,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4780
+    },
+    {
+      "time_sec": 235.66819047927856,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4808
+    },
+    {
+      "time_sec": 239.28225898742676,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4880
+    },
+    {
+      "time_sec": 240.6690661907196,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4908
+    },
+    {
+      "time_sec": 244.776930809021,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4992
+    },
+    {
+      "time_sec": 245.6701579093933,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5010
+    },
+    {
+      "time_sec": 250.27738165855408,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5104
+    },
+    {
+      "time_sec": 250.6772060394287,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5112
+    },
+    {
+      "time_sec": 252.56836199760437,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5150
+    },
+    {
+      "time_sec": 255.27793550491333,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5204
+    },
+    {
+      "time_sec": 255.6788365840912,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5212
+    },
+    {
+      "time_sec": 260.2800281047821,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5306
+    },
+    {
+      "time_sec": 260.67910146713257,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5314
+    },
+    {
+      "time_sec": 265.68076944351196,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5416
+    },
+    {
+      "time_sec": 265.7818794250488,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5418
+    },
+    {
+      "time_sec": 270.6812527179718,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5518
+    },
+    {
+      "time_sec": 271.27790665626526,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5530
+    },
+    {
+      "time_sec": 272.56929659843445,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5556
+    },
+    {
+      "time_sec": 275.6833200454712,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5618
+    },
+    {
+      "time_sec": 276.77628445625305,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5640
+    },
+    {
+      "time_sec": 280.7113528251648,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5720
+    },
+    {
+      "time_sec": 281.7782518863678,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5742
+    },
+    {
+      "time_sec": 285.7115912437439,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5822
+    },
+    {
+      "time_sec": 287.29406905174255,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5854
+    },
+    {
+      "time_sec": 290.7174472808838,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5922
+    },
+    {
+      "time_sec": 292.57808327674866,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5962
+    },
+    {
+      "time_sec": 292.7772626876831,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5966
+    },
+    {
+      "time_sec": 295.74534940719604,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 6024
+    },
+    {
+      "time_sec": 297.7781014442444,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 6066
+    }
+  ],
+  "goal_msg_count": 600,
+  "raw_goal_msg_count": 600,
+  "unique_goal_count": 4,
+  "unique_goal_count_quantized_0p5m": 4,
+  "unique_goal_count_quantized_1p0m": 4,
+  "repeated_goal_count": 596,
+  "goal_switch_count": 3,
+  "goal_lifecycle_goal_switch_count": 3,
+  "same_goal_max_duration_sec": 238.9982750415802,
+  "same_goal_avg_duration_sec": 74.50055640935898,
+  "active_goal_segment_count": 4,
+  "consecutive_same_goal_msg_count_max": 479,
+  "goal_republish_count": 596,
+  "true_repeated_goal_count": 0,
+  "too_close_goal_event_count": 2,
+  "goal_retire_event_count": 3,
+  "goal_retire_reasons": {
+    "goal_too_close_switch": 1,
+    "no_progress_switch": 1,
+    "escape_goal_coverage_stall": 1
+  },
+  "escape_goal_count": 1,
+  "average_goal_distance": 0.030386359975590912,
+  "min_goal_distance": 0.0,
+  "max_goal_distance": 11.40175425099138,
+  "frontier_candidate_count_series": [
+    0,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    121,
+    115,
+    115,
+    125,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124
+  ],
+  "frontier_viewpoint_count_series": [
+    0,
+    46,
+    46,
+    46,
+    46,
+    46,
+    46,
+    46,
+    46,
+    46,
+    50,
+    46,
+    46,
+    44,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45
+  ],
+  "frontier_count_zero_duration": 0.0,
+  "planner_pos_cmd_count": 5977,
+  "trajectory_count": 6112,
+  "trajectory_update_rate": 20.0642219876499,
+  "active_path_count": 2995,
+  "map_cloud_count": 598,
+  "local_cloud_count": 1797,
+  "explored_grid_point_count_start": 1363,
+  "explored_grid_point_count_end": 1492,
+  "explored_grid_point_gain": 129,
+  "occupancy_grid_point_count_start": 188,
+  "occupancy_grid_point_count_end": 216,
+  "coverage_proxy_start": 0.0,
+  "coverage_proxy_end": 0.10985127374466205,
+  "coverage_proxy_gain": 0.10985127374466205,
+  "coverage_stall_events": [
+    {
+      "time_sec": 32.51188826560974,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695612505,
+        0.20058392130066455,
+        1.2
+      ],
+      "goal": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 700
+    },
+    {
+      "time_sec": 52.512043952941895,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1096
+    },
+    {
+      "time_sec": 72.51205778121948,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.059381695616243,
+        0.20058392130040625,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1498
+    },
+    {
+      "time_sec": 92.51505994796753,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 1904
+    },
+    {
+      "time_sec": 112.5450668334961,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2310
+    },
+    {
+      "time_sec": 132.54757642745972,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 2714
+    },
+    {
+      "time_sec": 152.56380009651184,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3121
+    },
+    {
+      "time_sec": 172.56473422050476,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3527
+    },
+    {
+      "time_sec": 192.56542301177979,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 3933
+    },
+    {
+      "time_sec": 212.56627249717712,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4339
+    },
+    {
+      "time_sec": 232.56801676750183,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 4744
+    },
+    {
+      "time_sec": 252.56836199760437,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5150
+    },
+    {
+      "time_sec": 272.56929659843445,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5556
+    },
+    {
+      "time_sec": 292.57808327674866,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        3.0593816956162434,
+        0.20058392130040623,
+        1.2
+      ],
+      "goal": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "frontier_count": 124,
+      "coverage_proxy": 0.10985127374466205,
+      "trajectory_count": 5962
+    }
+  ],
+  "event_counts": {
+    "COVERAGE_STALL": 14,
+    "MOTION_STUCK": 54,
+    "REPEATED_GOAL": 57
+  },
+  "status_latest": {
+    "/fuel/p11_lite/exploration_manager_status": "REAL_FLIGHT_COMMAND=false active_goal=true active_goal_valid=true goal_age=238.997 active_goal_age=238.997 goal_distance=8.943 goal_reached=false goal_timeout=true too_close_expired=false no_progress_detected=true goal_switch_count=7 goal_retire_event_count=6 goal_retire_reasons={'goal_too_close_switch': 3, 'no_progress_switch': 2, 'escape_goal_coverage_stall': 1} true_repeated_goal_count=0 goal_republish_count=736 goal_hold_active=true goal_progress_score=0.000 coverage_gain_since_goal=0.0000 coverage_proxy=0.109851 window_coverage_gain_30s=0.000000 window_motion_30s=0.000 goal_switch_blocked_by_progress_count=0 goal_switch_blocked_by_similarity_count=19 goal_switch_blocked_by_low_gain_count=79 oscillation_cooldown_active=false active_region_id=R-2_-3 pending_region_id=R-2_-3 region_hold_active=false region_stall_detected=true region_switch_reason=none goal_jitter_suppressed_count=19 goal_jump_reject_count=0 goal_smoothing_applied_count=3 goal_jump_count=3 goal_jitter_score=10.573 coverage_stall_detected=true coverage_stall_duration=30.000 recovery_region_id=NONE recovery_goal=(12.00,0.00,1.20) recovery_count=1 escape_goal_count=1 escape_fallback_count=0 escape_skip_recent_count=0 escape_candidate_count=0 escape_active=true escape_reason=coverage_stall frontier_candidate_count=124 frontier_viewpoint_count=45 last_goal_event=KEEP_GOAL last_goal_event_reason=coverage_stall_frontier_point_escape_disabled last_goal_event_goal=(12.00,0.00,1.20) switch_blocked_by_hysteresis_count=0 switch_blocked_by_score_count=79 switch_blocked_by_rate_count=0 switch_reason=coverage_stall_frontier_point_escape_disabled last_switch_reason=escape_goal_coverage_stall min_goal_distance=1.000 reason=coverage_stall_frontier_point_escape_disabled",
+    "/fuel/p11_lite/map_status": "REAL_FLIGHT_COMMAND=false explored_cell_count=1492 occupied_cell_count=216 frontier_candidate_count=124 map_update_count=1474",
+    "/fuel/p11_lite/frontier_status": "REAL_FLIGHT_COMMAND=false candidate_count=124 frontier_candidate_count=124 valid_viewpoint_count=45 best_score=6.244 best_viewpoint=(12.00,0.00,1.20) best_viewpoint_distance=8.943 best_viewpoint_update_count=8 too_close_filtered_count=0 visited_region_count=0 region_count=19 active_region_id=R-2_-3 active_region_age=368.000 active_region_count=6 completed_region_count=11 stale_region_count=2 blacklisted_region_count=0 region_switch_count=1 selected_region_score=3.405 selected_region_unknown_gain=0.171 active_region_boundary_score=0.000 active_region_internal_unknown_gain=0.229 active_region_revisit_score=0.000 region_score=3.742 top_region_list=R1_1:3.94,R-1_1:3.92,R2_-2:3.91,R2_-3:3.83,R-2_-2:3.82 revisit_penalty_count=0 recent_revisit_penalty_count=0 trail_exclusion_count=0 selected_goal_region=(5,0) selected_goal_revisit_score=0.000 too_close_penalty_count=0 behind_penalty_count=27 boundary_penalty_count=0 boundary_follow_penalty_count=0 low_clearance_viewpoint_reject_count=3 information_gain=0.617 selected_unknown_gain=0.617 selected_frontier_density=0.750 selected_distance_cost=0.298 selected_revisit_penalty=0.000 selected_boundary_penalty=0.000 selected_total_score=6.244 selected_goal_boundary_distance=3.000 selected_goal_inward_score=0.000 selected_goal_boundary_tangent_score=1.000 boundary_hard_reject_enabled=true boundary_penalty=0.000 boundary_goal_count=0 boundary_goal_reject_count=17 boundary_follow_ratio=0.000 boundary_follow_reject_count=17 inward_goal_used_count=44 inward_goal_collision_reject_count=12 selected_inward_goal_offset=1.500 selected_unknown_centroid=(10.55,0.00) selected_goal_information_gain=0.617 low_gain_reject_count=0 novelty_score=1.000 selected_goal_clearance=1.750",
+    "/fuel/p11_lite/goal_lifecycle_status": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=235.997"
+  },
+  "result": "PARTIAL"
+}

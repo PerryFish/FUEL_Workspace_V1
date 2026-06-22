@@ -1,0 +1,52 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "fuel_plan_manager"
+
+    real_interface:
+      enable_real_interface_mode: false
+
+      frames:
+        global_frame: "map"
+        odom_frame: "odom"
+        base_frame: "base_link"
+        sensor_frame: "sensor"
+
+      input_topics:
+        odom: "/state_estimation"
+        map_cloud: "/mapping/global_cloud"
+        local_cloud: "/mapping/local_cloud"
+        occupied_cloud: "/mapping/occupied_cloud"
+        free_cloud: "/mapping/free_cloud"
+
+      output_topics:
+        waypoint: "/fuel/waypoint"
+        global_path: "/fuel/global_path"
+        local_trajectory: "/fuel/local_trajectory"
+        trajectory_contract: "/fuel/plan_manager/trajectory_contract"
+        planner_status: "/fuel/exploration_state"
+
+      control_bridge:
+        enable_control_bridge: false
+        output_waypoint_topic: "/planner/waypoint_cmd"
+        output_path_topic: "/planner/path_cmd"
+        output_trajectory_topic: "/planner/trajectory_cmd"
+        preferred_control_interface: "trajectory"
+        publish_rate: 10.0
+
+      validation:
+        min_odom_hz: 10.0
+        min_map_hz: 1.0
+        max_odom_age_sec: 0.3
+        max_map_age_sec: 2.0
+        require_tf_map_to_base: false
+        require_non_empty_map: true
+        require_non_empty_path: true
+        require_non_empty_trajectory: true
+
+      mode:
+        robot_mode: "air"
+        allow_land_mode: true
+        allow_air_mode: true
+        land_fixed_z: 0.6
+        air_min_z: 0.8
+        air_max_z: 2.5

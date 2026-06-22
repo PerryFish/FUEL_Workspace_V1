@@ -1,0 +1,182 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.22
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 120; 120; 120
+      Enabled: true
+      Line Style:
+        Line Width: 0.02
+        Value: Lines
+      Name: Low Contrast Grid
+      Plane: XY
+      Plane Cell Count: 40
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MAIN READABLE MARKERS - UAV / GOAL / BEST VIEW / PATHS / LEGEND
+      Topic:
+        Value: /fuel/p11_lite/visual/all_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Complex Environment Walls / Rooms
+      Topic:
+        Value: /fuel/p11_lite/complex_env/wall_markers
+      Value: true
+    - Alpha: 0.85
+      Class: rviz_default_plugins/PointCloud2
+      Color: 235; 35; 25
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: Complex Environment Occupied Points
+      Position Transformer: XYZ
+      Size (Pixels): 8
+      Size (m): 0.18
+      Style: Boxes
+      Topic:
+        Value: /fuel/p11_lite/complex_env/occupied_points
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Complex Environment Boundary
+      Topic:
+        Value: /fuel/p11_lite/complex_env/map_boundary
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: UAV History Trail
+      Topic:
+        Value: /fuel/p11_lite/visual/uav_trail
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Goal / Viewpoint / Path Markers
+      Topic:
+        Value: /fuel/p11_lite/visual/path_markers
+      Value: true
+    - Class: rviz_default_plugins/Odometry
+      Color: 255; 110; 0
+      Enabled: true
+      Keep: 300
+      Name: Odom Arrow
+      Position Tolerance: 0.05
+      Shape: Arrow
+      Topic:
+        Value: /odom
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Color: 0; 220; 60
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.08
+      Name: Raw Global Path (secondary)
+      Topic:
+        Value: /fuel/global_path
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Color: 30; 95; 255
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.1
+      Name: Raw Local Trajectory (secondary)
+      Topic:
+        Value: /fuel/local_trajectory
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Color: 255; 205; 0
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.12
+      Name: Raw Managed Trajectory (secondary)
+      Topic:
+        Value: /fuel/plan_manager/managed_trajectory
+      Value: true
+    - Alpha: 0.75
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 35; 20
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: Raw Occupied Obstacles (secondary)
+      Position Transformer: XYZ
+      Size (Pixels): 10
+      Size (m): 0.2
+      Style: Boxes
+      Topic:
+        Value: /fuel/p11_lite/local_occupied_points
+      Value: true
+    - Alpha: 0.35
+      Class: rviz_default_plugins/PointCloud2
+      Color: 80; 190; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: Raw Free Space (secondary)
+      Position Transformer: XYZ
+      Size (Pixels): 5
+      Size (m): 0.1
+      Style: Points
+      Topic:
+        Value: /fuel/p11_lite/local_free_points
+      Value: true
+    - Alpha: 0.95
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: Raw Frontier Candidates (secondary)
+      Position Transformer: XYZ
+      Size (Pixels): 12
+      Size (m): 0.26
+      Style: Spheres
+      Topic:
+        Value: /fuel/p11_lite/frontier_candidates_raw
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Map Boundary
+      Topic:
+        Value: /fuel/p11_lite/visual/map_boundary_marker
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Legend
+      Topic:
+        Value: /fuel/p11_lite/visual/legend_markers
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 24; 24; 28
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 48
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 1
+      Name: Top Oblique Overview
+      Pitch: 1.35
+      Target Frame: map
+      Yaw: 0.78
+Window Geometry:
+  Height: 950
+  Width: 1500

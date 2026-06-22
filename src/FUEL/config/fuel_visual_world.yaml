@@ -1,0 +1,33 @@
+fuel_ros2:
+  ros__parameters:
+    visual_world:
+      frame_id: "map"
+      world_name: "fuel_office_aligned"
+      resolution: 0.2
+
+      bounds:
+        min_x: -5.0
+        max_x: 5.0
+        min_y: -5.0
+        max_y: 5.0
+        min_z: 0.0
+        max_z: 3.0
+
+      obstacles:
+        - name: "left_wall"
+          type: "box"
+          center: [-1.8, 0.0, 1.0]
+          size: [0.2, 6.0, 2.0]
+        - name: "right_wall"
+          type: "box"
+          center: [1.8, 0.0, 1.0]
+          size: [0.2, 6.0, 2.0]
+        - name: "front_box"
+          type: "box"
+          center: [0.0, 2.2, 0.6]
+          size: [0.8, 0.8, 1.2]
+        - name: "pillar"
+          type: "cylinder"
+          center: [0.0, -1.5, 0.8]
+          radius: 0.25
+          height: 1.6

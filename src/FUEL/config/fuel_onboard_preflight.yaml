@@ -1,0 +1,37 @@
+fuel_ros2:
+  ros__parameters:
+    onboard_preflight:
+      enable_onboard_preflight: false
+      dry_run_only: true
+      allow_real_flight: false
+
+      evidence_gate:
+        require_real_bag: true
+        allow_fake_bag_for_dev: true
+        min_real_bag_duration_sec: 30.0
+        min_odom_hz: 10.0
+        min_map_hz: 1.0
+        require_state_estimation: true
+        require_global_cloud: true
+        require_safety_gate_pass: true
+        require_closed_loop_fake_follower_pass: true
+        require_control_failsafe_pass: true
+
+      hardware_interface:
+        forbid_actuator_commands: true
+        allow_shadow_commands_only: true
+        expected_control_interface: "trajectory"
+        max_command_rate_hz: 20.0
+        command_timeout_sec: 0.5
+
+      safety_limits:
+        min_z: 0.6
+        max_z: 3.0
+        max_speed: 3.0
+        max_acceleration: 2.0
+        min_obstacle_distance: 0.5
+        max_trajectory_age_sec: 1.0
+
+      go_no_go:
+        require_all_green_for_hardware: true
+        default_decision: "NO_GO"

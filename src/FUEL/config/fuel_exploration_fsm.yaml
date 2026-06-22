@@ -1,0 +1,31 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "mvp"
+    exploration_fsm:
+      enable_exploration_fsm: false
+      auto_start: true
+      use_fis_best_viewpoint: true
+      fallback_to_mvp_goal: true
+      tick_rate: 2.0
+      goal_reached_distance: 0.5
+      execution_timeout_sec: 15.0
+      no_frontier_timeout_sec: 5.0
+      max_error_recovery_count: 5
+      publish_debug_markers: true
+      debug_publish_rate: 2.0
+
+fuel_mvp_node:
+  ros__parameters:
+    planner_backend: "mvp"
+    exploration_fsm:
+      enable_exploration_fsm: false
+      auto_start: true
+      use_fis_best_viewpoint: true
+      fallback_to_mvp_goal: true
+      tick_rate: 2.0
+      goal_reached_distance: 0.5
+      execution_timeout_sec: 15.0
+      no_frontier_timeout_sec: 5.0
+      max_error_recovery_count: 5
+      publish_debug_markers: true
+      debug_publish_rate: 2.0

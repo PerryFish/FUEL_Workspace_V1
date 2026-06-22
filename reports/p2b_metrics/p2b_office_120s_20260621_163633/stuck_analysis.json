@@ -1,0 +1,792 @@
+{
+  "run_id": "p2b_office_120s_20260621_163633",
+  "main_stuck_cause": "REPEATED_GOAL",
+  "stuck_event_count": 17,
+  "event_counts": {
+    "COVERAGE_STALL": 4,
+    "MOTION_STUCK": 17,
+    "REPEATED_GOAL": 22
+  },
+  "coverage_proxy_gain": 0.12553379472831688,
+  "uav_total_distance": 8.35110957173586,
+  "trajectory_count": 2537,
+  "goal_msg_count": 240,
+  "unique_goal_count": 4,
+  "repeated_goal_count": 236,
+  "events": [
+    {
+      "time_sec": 1.8284621238708496,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -1.8699999999999999,
+        -3.8899999999999997,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 35
+    },
+    {
+      "time_sec": 7.328380584716797,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 151
+    },
+    {
+      "time_sec": 12.82841420173645,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 273
+    },
+    {
+      "time_sec": 17.828559160232544,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 383
+    },
+    {
+      "time_sec": 20.038729190826416,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 432
+    },
+    {
+      "time_sec": 20.395275831222534,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 439
+    },
+    {
+      "time_sec": 23.328162670135498,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 503
+    },
+    {
+      "time_sec": 25.039829969406128,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 542
+    },
+    {
+      "time_sec": 28.328258514404297,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 613
+    },
+    {
+      "time_sec": 30.039939165115356,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 652
+    },
+    {
+      "time_sec": 33.32831954956055,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 723
+    },
+    {
+      "time_sec": 35.04042172431946,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -3.109,
+        -5.422999999999999,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 762
+    },
+    {
+      "time_sec": 40.04112482070923,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 871
+    },
+    {
+      "time_sec": 40.328158378601074,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 875
+    },
+    {
+      "time_sec": 40.3953537940979,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 877
+    },
+    {
+      "time_sec": 45.041372537612915,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 972
+    },
+    {
+      "time_sec": 45.32852745056152,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 977
+    },
+    {
+      "time_sec": 50.041775703430176,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1075
+    },
+    {
+      "time_sec": 50.331807136535645,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1079
+    },
+    {
+      "time_sec": 55.04193162918091,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1177
+    },
+    {
+      "time_sec": 55.82844877243042,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1191
+    },
+    {
+      "time_sec": 60.04644560813904,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1279
+    },
+    {
+      "time_sec": 60.4137008190155,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1285
+    },
+    {
+      "time_sec": 61.328356981277466,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1305
+    },
+    {
+      "time_sec": 65.0469160079956,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1381
+    },
+    {
+      "time_sec": 66.32888984680176,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1407
+    },
+    {
+      "time_sec": 70.04723858833313,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1485
+    },
+    {
+      "time_sec": 71.82838320732117,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1519
+    },
+    {
+      "time_sec": 75.07961630821228,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1587
+    },
+    {
+      "time_sec": 77.3284101486206,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1631
+    },
+    {
+      "time_sec": 80.07978653907776,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1689
+    },
+    {
+      "time_sec": 80.41447687149048,
+      "event_type": "COVERAGE_STALL",
+      "reason": "20s_frontier_stable_and_coverage_gain_below_0.01",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1695
+    },
+    {
+      "time_sec": 82.82870316505432,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -0.09999999999999992,
+        -1.7000000000000028,
+        1.2
+      ],
+      "goal": [
+        -6.0,
+        -9.0,
+        1.2
+      ],
+      "frontier_count": 108,
+      "coverage_proxy": 0.10005890148726256,
+      "trajectory_count": 1743
+    },
+    {
+      "time_sec": 88.32859373092651,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -1.9749393212582533,
+        -2.9963972143454543,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 111,
+      "coverage_proxy": 0.1058754233544397,
+      "trajectory_count": 1857
+    },
+    {
+      "time_sec": 93.82867002487183,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -2.784190633673545,
+        -2.465504826236857,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 101,
+      "coverage_proxy": 0.10889412457664556,
+      "trajectory_count": 1971
+    },
+    {
+      "time_sec": 99.32891464233398,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -3.4272491575179407,
+        -1.822750509634776,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 113,
+      "coverage_proxy": 0.11316448240318068,
+      "trajectory_count": 2087
+    },
+    {
+      "time_sec": 104.82914209365845,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -4.382449873229342,
+        -1.5011217337771583,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 121,
+      "coverage_proxy": 0.11824473567957591,
+      "trajectory_count": 2205
+    },
+    {
+      "time_sec": 104.8503360748291,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -4.382449873229342,
+        -1.5011217337771583,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 121,
+      "coverage_proxy": 0.11824473567957591,
+      "trajectory_count": 2206
+    },
+    {
+      "time_sec": 109.85601019859314,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -5.047725747133964,
+        -2.0479556995905104,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 123,
+      "coverage_proxy": 0.12052716831099985,
+      "trajectory_count": 2315
+    },
+    {
+      "time_sec": 110.32969236373901,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -5.086121664753978,
+        -2.0862504136846347,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 123,
+      "coverage_proxy": 0.12052716831099985,
+      "trajectory_count": 2323
+    },
+    {
+      "time_sec": 114.8798155784607,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -5.387615684374608,
+        -2.8718984132644927,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 123,
+      "coverage_proxy": 0.12384037696951848,
+      "trajectory_count": 2425
+    },
+    {
+      "time_sec": 115.8287193775177,
+      "event_type": "REPEATED_GOAL",
+      "reason": "three_consecutive_goals_within_0.5m",
+      "position": [
+        -5.465406767753464,
+        -3.0069643274988733,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 123,
+      "coverage_proxy": 0.12384037696951848,
+      "trajectory_count": 2445
+    },
+    {
+      "time_sec": 119.88114213943481,
+      "event_type": "MOTION_STUCK",
+      "reason": "20s_displacement_below_0.2m_with_planner_output",
+      "position": [
+        -5.499788356664589,
+        -3.9320395386587648,
+        1.2
+      ],
+      "goal": [
+        -9.0,
+        -11.0,
+        1.2
+      ],
+      "frontier_count": 123,
+      "coverage_proxy": 0.12553379472831688,
+      "trajectory_count": 2535
+    }
+  ]
+}

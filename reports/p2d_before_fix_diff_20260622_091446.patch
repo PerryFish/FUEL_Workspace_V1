@@ -1,0 +1,7 @@
+diff --git a/ZHY/TARE/src/autonomous_exploration_development_environment b/ZHY/TARE/src/autonomous_exploration_development_environment
+deleted file mode 160000
+index 158e67b..0000000
+--- a/ZHY/TARE/src/autonomous_exploration_development_environment
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 158e67b31b644ed1e8b06eb1d7f70e183cc62591

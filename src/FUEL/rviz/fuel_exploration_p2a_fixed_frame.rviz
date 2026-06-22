@@ -1,0 +1,229 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid - map XY
+      Enabled: true
+      Plane: XY
+      Reference Frame: map
+      Cell Size: 1
+      Color: 90; 90; 90
+      Alpha: 0.35
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Axes: true
+      Show Names: true
+      Marker Scale: 0.8
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Global Map - map_generator
+      Enabled: true
+      Topic:
+        Value: /map_generator/global_cloud
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Flat Squares
+      Size (Pixels): 3
+      Color Transformer: FlatColor
+      Color: 180; 180; 180
+      Alpha: 0.85
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Global Map - compatibility
+      Enabled: true
+      Topic:
+        Value: /global_cloud
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: FlatColor
+      Color: 120; 120; 120
+      Alpha: 0.55
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Occupancy Grid
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/occupancy_grid
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: FlatColor
+      Color: 220; 220; 220
+      Alpha: 0.65
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Explored Grid
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/explored_grid
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: FlatColor
+      Color: 60; 170; 255
+      Alpha: 0.70
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Local Free Points
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/local_free_points
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: FlatColor
+      Color: 80; 210; 120
+      Alpha: 0.70
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Local Occupied Points
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/local_occupied_points
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 4
+      Color Transformer: FlatColor
+      Color: 255; 120; 60
+      Alpha: 0.88
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Frontier Candidates Raw
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/frontier_candidates_raw
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Spheres
+      Size (m): 0.13
+      Color Transformer: FlatColor
+      Color: 255; 220; 30
+      Alpha: 0.95
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Frontier Viewpoints
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/frontier_viewpoints
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Style: Spheres
+      Size (m): 0.20
+      Color Transformer: FlatColor
+      Color: 255; 60; 210
+      Alpha: 0.95
+    - Class: rviz_default_plugins/MarkerArray
+      Name: All Planning Markers
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/all_markers
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Marker
+      Name: UAV Marker
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/uav_marker
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Marker
+      Name: UAV Trail
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/uav_trail
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Path Markers
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/path_markers
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Frontier Markers
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/frontier_markers
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Marker
+      Name: Current Goal Marker
+      Enabled: true
+      Topic:
+        Value: /fuel/p11_lite/visual/current_goal_marker
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/MarkerArray
+      Name: World Bounds
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_bounds
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/MarkerArray
+      Name: World Obstacles
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_obstacles
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Path
+      Name: Travel Trajectory
+      Enabled: true
+      Topic:
+        Value: /planning/travel_traj
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Color: 20; 240; 255
+      Line Style: Lines
+      Line Width: 0.18
+    - Class: rviz_default_plugins/Path
+      Name: Managed Trajectory
+      Enabled: true
+      Topic:
+        Value: /fuel/plan_manager/managed_trajectory
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Color: 70; 130; 255
+      Line Style: Lines
+      Line Width: 0.22
+    - Class: rviz_default_plugins/Odometry
+      Name: Odom
+      Enabled: true
+      Topic:
+        Value: /odom
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Shape: Arrow
+      Color: 255; 80; 60
+      Keep: 50
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Value: /move_base_simple/goal
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 28
+      Focal Point:
+        X: 0
+        Y: -2
+        Z: 1.2
+      Pitch: 0.75
+      Yaw: 0.78
+Window Geometry:
+  Height: 950
+  Width: 1500

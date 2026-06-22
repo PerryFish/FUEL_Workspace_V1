@@ -1,0 +1,22 @@
+p11_lite_complex_environment_adapter:
+  ros__parameters:
+    environment_mode: complex
+    environment_name: fuel_exploration_large_aligned
+    world_config: /home/nuaa/ZHY/FUEL_PLANNER_V2/ros2_ws/src/fuel_ros2/config/fuel_visual_world_exploration.yaml
+    sample_resolution: 0.25
+    frame_id: map
+
+local_sensing_lite:
+  ros__parameters:
+    environment_mode: complex
+    environment_name: fuel_exploration_large_aligned
+    world_config: /home/nuaa/ZHY/FUEL_PLANNER_V2/ros2_ws/src/fuel_ros2/config/fuel_visual_world_exploration.yaml
+    sensing_radius: 8.0
+    local_window_radius: 8.0
+    z_min: 0.0
+    z_max: 4.0
+
+p11_lite_visual_markers:
+  ros__parameters:
+    environment_mode: complex
+    environment_name: fuel_exploration_large_aligned

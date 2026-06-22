@@ -1,0 +1,35 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    path_searching:
+      enable_path_searching: false
+      use_path_searching_in_fsm: false
+      algorithm: "grid_astar_3d"
+      grid_resolution: 0.2
+      neighbor_mode: 26
+      max_search_nodes: 80000
+      safety_distance: 0.35
+      allow_unknown: true
+      allow_straight_line_fallback: true
+      simplify_path: true
+      simplify_line_of_sight: true
+      debug_publish_rate: 2.0
+
+fuel_mvp_node:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    path_searching:
+      enable_path_searching: false
+      use_path_searching_in_fsm: false
+      algorithm: "grid_astar_3d"
+      grid_resolution: 0.2
+      neighbor_mode: 26
+      max_search_nodes: 80000
+      safety_distance: 0.35
+      allow_unknown: true
+      allow_straight_line_fallback: true
+      simplify_path: true
+      simplify_line_of_sight: true
+      debug_publish_rate: 2.0

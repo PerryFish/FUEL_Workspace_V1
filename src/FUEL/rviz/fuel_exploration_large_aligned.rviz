@@ -1,0 +1,222 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Plane: XY
+      Reference Frame: map
+      Cell Size: 1
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Frame Timeout: 15
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Exploration Map Cloud
+      Enabled: true
+      Topic:
+        Value: /map_cloud
+      Style: Points
+      Size (Pixels): 2
+      Alpha: 0.35
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Exploration Global Cloud
+      Enabled: true
+      Topic:
+        Value: /global_cloud
+      Style: Points
+      Size (Pixels): 1
+      Alpha: 0.22
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Gazebo/RViz World Obstacles
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_obstacles
+    - Class: rviz_default_plugins/MarkerArray
+      Name: World Bounds
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/world_bounds
+    - Class: rviz_default_plugins/Marker
+      Name: UAV Current Pose - RED Marker
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_marker
+    - Class: rviz_default_plugins/Pose
+      Name: UAV Current Pose - RED
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_pose
+      Shape: Arrow
+      Shaft Length: 1.10
+      Shaft Radius: 0.16
+      Head Length: 0.45
+      Head Radius: 0.28
+      Color: 255; 50; 0
+    - Class: rviz_default_plugins/Path
+      Name: UAV History Trail - THICK
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/uav_trail
+      Color: 180; 255; 20
+      Line Style: Lines
+      Line Width: 0.15
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Current Goal - LARGE
+      Enabled: true
+      Topic:
+        Value: /fuel/frontiers
+    - Class: rviz_default_plugins/Pose
+      Name: Current Goal - LARGE Pose
+      Enabled: true
+      Topic:
+        Value: /fuel/waypoint
+      Shape: Arrow
+      Shaft Length: 0.90
+      Shaft Radius: 0.12
+      Head Length: 0.35
+      Head Radius: 0.24
+      Color: 255; 40; 255
+    - Class: rviz_default_plugins/Path
+      Name: Future Global Path
+      Enabled: true
+      Topic:
+        Value: /fuel/global_path
+      Color: 20; 220; 80
+      Line Width: 0.12
+    - Class: rviz_default_plugins/Path
+      Name: Future Local Trajectory
+      Enabled: true
+      Topic:
+        Value: /fuel/local_trajectory
+      Color: 255; 190; 20
+      Line Width: 0.16
+    - Class: rviz_default_plugins/MarkerArray
+      Name: FIS Frontier Clusters
+      Enabled: true
+      Topic:
+        Value: /fuel/fis/frontier_clusters
+    - Class: rviz_default_plugins/MarkerArray
+      Name: FIS Viewpoints
+      Enabled: true
+      Topic:
+        Value: /fuel/fis/viewpoints
+    - Class: rviz_default_plugins/Pose
+      Name: FIS Best Viewpoint
+      Enabled: true
+      Topic:
+        Value: /fuel/fis/best_viewpoint
+      Shape: Arrow
+    - Class: rviz_default_plugins/Pose
+      Name: FSM Current Goal
+      Enabled: true
+      Topic:
+        Value: /fuel/fsm/current_goal
+      Shape: Arrow
+    - Class: rviz_default_plugins/Path
+      Name: FSM Path
+      Enabled: true
+      Topic:
+        Value: /fuel/fsm/path
+      Color: 255; 255; 120
+      Line Width: 0.08
+    - Class: rviz_default_plugins/Path
+      Name: Path Searching Result
+      Enabled: true
+      Topic:
+        Value: /fuel/path_searching/path
+      Color: 20; 220; 120
+      Line Width: 0.12
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Path Searching Debug
+      Enabled: true
+      Topic:
+        Value: /fuel/path_searching/debug_markers
+    - Class: rviz_default_plugins/Path
+      Name: Bspline Planned Trajectory
+      Enabled: true
+      Topic:
+        Value: /fuel/bspline/sampled_trajectory
+      Color: 0; 230; 180
+      Line Width: 0.18
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Bspline Debug
+      Enabled: true
+      Topic:
+        Value: /fuel/bspline/debug_markers
+    - Class: rviz_default_plugins/Path
+      Name: Plan Manager Planned Path
+      Enabled: true
+      Topic:
+        Value: /fuel/plan_manager/managed_path
+      Color: 80; 140; 255
+      Line Width: 0.14
+    - Class: rviz_default_plugins/Path
+      Name: Plan Manager Planned Trajectory
+      Enabled: true
+      Topic:
+        Value: /fuel/plan_manager/managed_trajectory
+      Color: 255; 90; 160
+      Line Width: 0.18
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Plan Manager Debug
+      Enabled: true
+      Topic:
+        Value: /fuel/plan_manager/debug_markers
+    - Class: rviz_default_plugins/Path
+      Name: Safety Gate Planned Trajectory
+      Enabled: true
+      Topic:
+        Value: /fuel/safety_gate/safe_trajectory
+      Color: 255; 255; 255
+      Line Width: 0.18
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Safety Gate Debug
+      Enabled: true
+      Topic:
+        Value: /fuel/safety_gate/debug_markers
+    - Class: rviz_default_plugins/Marker
+      Name: Exploration State Text
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/status_text
+    - Class: rviz_default_plugins/Marker
+      Name: Wrapper Demo Warning Text
+      Enabled: true
+      Topic:
+        Value: /fuel/visual/warning_text
+    - Class: rviz_default_plugins/Marker
+      Name: Fallback Warning Text
+      Enabled: false
+      Topic:
+        Value: /fuel/visual/demo_truth_status_marker
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 28
+      Focal Point:
+        X: 0
+        Y: -1
+        Z: 1.4
+      Pitch: 0.75
+      Yaw: 0.85
+Window Geometry:
+  Height: 950
+  Width: 1500

@@ -1,0 +1,825 @@
+{
+  "raw_goal_msg_count": 600,
+  "unique_goal_count_quantized_0p5m": 4,
+  "unique_goal_count_quantized_1p0m": 4,
+  "goal_switch_count": 3,
+  "same_goal_max_duration_sec": 238.9982750415802,
+  "same_goal_avg_duration_sec": 74.50055640935898,
+  "active_goal_segments": [
+    {
+      "key": [
+        6,
+        0,
+        2
+      ],
+      "start_time_sec": 0.2756211757659912,
+      "end_time_sec": 9.775116205215454,
+      "message_count": 20,
+      "representative_point": [
+        3.0593816956162483,
+        0.20058392130040592,
+        1.2
+      ],
+      "duration_sec": 9.499495029449463
+    },
+    {
+      "key": [
+        6,
+        4,
+        2
+      ],
+      "start_time_sec": 10.275490999221802,
+      "end_time_sec": 34.78131890296936,
+      "message_count": 50,
+      "representative_point": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "duration_sec": 24.50582790374756
+    },
+    {
+      "key": [
+        6,
+        14,
+        2
+      ],
+      "start_time_sec": 35.27936291694641,
+      "end_time_sec": 60.2779905796051,
+      "message_count": 51,
+      "representative_point": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "duration_sec": 24.99862766265869
+    },
+    {
+      "key": [
+        24,
+        0,
+        2
+      ],
+      "start_time_sec": 60.78048539161682,
+      "end_time_sec": 299.778760433197,
+      "message_count": 479,
+      "representative_point": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "duration_sec": 238.9982750415802
+    }
+  ],
+  "active_goal_segment_count": 4,
+  "consecutive_same_goal_msg_count_max": 479,
+  "goal_republish_count": 596,
+  "true_repeated_goal_count": 0,
+  "too_close_goal_event_count": 2,
+  "goal_retire_event_count": 3,
+  "goal_retire_reasons": {
+    "goal_too_close_switch": 1,
+    "no_progress_switch": 1,
+    "escape_goal_coverage_stall": 1
+  },
+  "escape_goal_count": 1,
+  "goal_lifecycle_event_count": 67,
+  "goal_lifecycle_events": [
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.059 y=0.201 z=1.200 reason=minimum_goal_hold duration=4.499",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.059,
+      "y": 0.201,
+      "z": 1.2,
+      "duration": 4.499,
+      "time_sec": 1.7771553993225098
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.059 y=0.201 z=1.200 reason=minimum_goal_hold duration=9.499",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.059,
+      "y": 0.201,
+      "z": 1.2,
+      "duration": 9.499,
+      "time_sec": 6.775114297866821
+    },
+    {
+      "raw": "GOAL_EVENT type=RETIRE_GOAL x=3.059 y=0.201 z=1.200 reason=goal_too_close_switch",
+      "type": "RETIRE_GOAL",
+      "reason": "goal_too_close_switch",
+      "x": 3.059,
+      "y": 0.201,
+      "z": 1.2,
+      "time_sec": 10.275919437408447
+    },
+    {
+      "raw": "GOAL_EVENT type=NEW_GOAL x=3.042 y=2.240 z=1.200 reason=goal_too_close_switch source=best_viewpoint score=5.938",
+      "type": "NEW_GOAL",
+      "reason": "goal_too_close_switch",
+      "source": "best_viewpoint",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "score": 5.938,
+      "time_sec": 10.277427673339844
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.042 y=2.240 z=1.200 reason=minimum_goal_hold duration=1.499",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "duration": 1.499,
+      "time_sec": 11.778748512268066
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.042 y=2.240 z=1.200 reason=minimum_goal_hold duration=6.499",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "duration": 6.499,
+      "time_sec": 16.775261640548706
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.042 y=2.240 z=1.200 reason=minimum_goal_hold duration=11.499",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "duration": 11.499,
+      "time_sec": 21.77531361579895
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.042 y=2.240 z=1.200 reason=hold_active_goal_score duration=16.499",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_score",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "duration": 16.499,
+      "time_sec": 26.776572942733765
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.042 y=2.240 z=1.200 reason=hold_active_goal_score duration=21.499",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_score",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "duration": 21.499,
+      "time_sec": 31.77720308303833
+    },
+    {
+      "raw": "GOAL_EVENT type=RETIRE_GOAL x=3.042 y=2.240 z=1.200 reason=no_progress_switch",
+      "type": "RETIRE_GOAL",
+      "reason": "no_progress_switch",
+      "x": 3.042,
+      "y": 2.24,
+      "z": 1.2,
+      "time_sec": 35.27967882156372
+    },
+    {
+      "raw": "GOAL_EVENT type=NEW_GOAL x=3.000 y=7.000 z=1.200 reason=no_progress_switch source=best_viewpoint score=5.938",
+      "type": "NEW_GOAL",
+      "reason": "no_progress_switch",
+      "source": "best_viewpoint",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "score": 5.938,
+      "time_sec": 35.2807240486145
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.000 y=7.000 z=1.200 reason=minimum_goal_hold duration=1.496",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "duration": 1.496,
+      "time_sec": 36.77639126777649
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.000 y=7.000 z=1.200 reason=minimum_goal_hold duration=6.496",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "duration": 6.496,
+      "time_sec": 41.78028964996338
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.000 y=7.000 z=1.200 reason=minimum_goal_hold duration=11.496",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "duration": 11.496,
+      "time_sec": 46.77580142021179
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.000 y=7.000 z=1.200 reason=hold_active_goal_score duration=16.496",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_score",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "duration": 16.496,
+      "time_sec": 51.77587842941284
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=3.000 y=7.000 z=1.200 reason=hold_active_goal_score duration=21.496",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_score",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "duration": 21.496,
+      "time_sec": 56.77811527252197
+    },
+    {
+      "raw": "GOAL_EVENT type=RETIRE_GOAL x=3.000 y=7.000 z=1.200 reason=escape_goal_coverage_stall",
+      "type": "RETIRE_GOAL",
+      "reason": "escape_goal_coverage_stall",
+      "x": 3.0,
+      "y": 7.0,
+      "z": 1.2,
+      "time_sec": 60.78080868721008
+    },
+    {
+      "raw": "GOAL_EVENT type=NEW_GOAL x=12.000 y=0.000 z=1.200 reason=escape_goal_coverage_stall source=pending_best_escape score=6.244",
+      "type": "NEW_GOAL",
+      "reason": "escape_goal_coverage_stall",
+      "source": "pending_best_escape",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "score": 6.244,
+      "time_sec": 60.78257489204407
+    },
+    {
+      "raw": "GOAL_EVENT type=ESCAPE_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall source=pending_best_escape",
+      "type": "ESCAPE_GOAL",
+      "reason": "coverage_stall",
+      "source": "pending_best_escape",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "time_sec": 60.78420948982239
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=minimum_goal_hold duration=0.997",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 0.997,
+      "time_sec": 61.77709102630615
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=minimum_goal_hold duration=5.997",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 5.997,
+      "time_sec": 66.77821564674377
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=minimum_goal_hold duration=10.997",
+      "type": "KEEP_GOAL",
+      "reason": "minimum_goal_hold",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 10.997,
+      "time_sec": 71.7777373790741
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=hold_active_goal_jitter_radius duration=15.998",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_jitter_radius",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 15.998,
+      "time_sec": 76.77656650543213
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=hold_active_goal_jitter_radius duration=20.997",
+      "type": "KEEP_GOAL",
+      "reason": "hold_active_goal_jitter_radius",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 20.997,
+      "time_sec": 81.77872109413147
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=25.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 25.997,
+      "time_sec": 86.77630257606506
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=30.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 30.997,
+      "time_sec": 91.77643513679504
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=35.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 35.997,
+      "time_sec": 96.77955603599548
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=40.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 40.997,
+      "time_sec": 101.78197765350342
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=45.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 45.997,
+      "time_sec": 106.77876138687134
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=50.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 50.997,
+      "time_sec": 111.77986121177673
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=55.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 55.997,
+      "time_sec": 116.78081274032593
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=60.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 60.997,
+      "time_sec": 121.77637481689453
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=65.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 65.997,
+      "time_sec": 126.77668786048889
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=70.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 70.997,
+      "time_sec": 131.77869725227356
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=75.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 75.997,
+      "time_sec": 136.77554488182068
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=80.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 80.997,
+      "time_sec": 141.78375554084778
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=85.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 85.997,
+      "time_sec": 146.77939534187317
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=90.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 90.997,
+      "time_sec": 151.7798409461975
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=95.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 95.997,
+      "time_sec": 156.7813503742218
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=100.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 100.997,
+      "time_sec": 161.77777123451233
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=105.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 105.997,
+      "time_sec": 166.77934002876282
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=110.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 110.997,
+      "time_sec": 171.77994847297668
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=115.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 115.997,
+      "time_sec": 176.78176832199097
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=120.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 120.997,
+      "time_sec": 181.77725982666016
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=125.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 125.997,
+      "time_sec": 186.779940366745
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=130.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 130.997,
+      "time_sec": 191.7815296649933
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=135.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 135.997,
+      "time_sec": 196.77700209617615
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=140.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 140.997,
+      "time_sec": 201.78022742271423
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=145.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 145.997,
+      "time_sec": 206.77848720550537
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=150.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 150.997,
+      "time_sec": 211.7800259590149
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=155.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 155.997,
+      "time_sec": 216.77757048606873
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=160.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 160.997,
+      "time_sec": 221.7813777923584
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=165.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 165.997,
+      "time_sec": 226.77735257148743
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=170.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 170.997,
+      "time_sec": 231.7779037952423
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=175.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 175.997,
+      "time_sec": 236.77676129341125
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=180.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 180.997,
+      "time_sec": 241.7780261039734
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=185.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 185.997,
+      "time_sec": 246.77916193008423
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=190.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 190.997,
+      "time_sec": 251.7788643836975
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=195.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 195.997,
+      "time_sec": 256.77962708473206
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=200.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 200.997,
+      "time_sec": 261.77982687950134
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=205.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 205.997,
+      "time_sec": 266.77636528015137
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=210.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 210.997,
+      "time_sec": 271.77760887145996
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=215.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 215.997,
+      "time_sec": 276.77795028686523
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=220.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 220.997,
+      "time_sec": 281.7784354686737
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=225.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 225.997,
+      "time_sec": 286.77836418151855
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=230.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 230.997,
+      "time_sec": 291.7793092727661
+    },
+    {
+      "raw": "GOAL_EVENT type=KEEP_GOAL x=12.000 y=0.000 z=1.200 reason=coverage_stall_frontier_point_escape_disabled duration=235.997",
+      "type": "KEEP_GOAL",
+      "reason": "coverage_stall_frontier_point_escape_disabled",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 1.2,
+      "duration": 235.997,
+      "time_sec": 296.7797222137451
+    }
+  ],
+  "segments_quantized_1p0m": [
+    {
+      "key": [
+        3,
+        0,
+        1
+      ],
+      "start_time_sec": 0.2756211757659912,
+      "end_time_sec": 9.775116205215454,
+      "message_count": 20,
+      "representative_point": [
+        3.0593816956162483,
+        0.20058392130040592,
+        1.2
+      ],
+      "duration_sec": 9.499495029449463
+    },
+    {
+      "key": [
+        3,
+        2,
+        1
+      ],
+      "start_time_sec": 10.275490999221802,
+      "end_time_sec": 34.78131890296936,
+      "message_count": 50,
+      "representative_point": [
+        3.0415671869313736,
+        2.240408744910284,
+        1.2
+      ],
+      "duration_sec": 24.50582790374756
+    },
+    {
+      "key": [
+        3,
+        7,
+        1
+      ],
+      "start_time_sec": 35.27936291694641,
+      "end_time_sec": 60.2779905796051,
+      "message_count": 51,
+      "representative_point": [
+        3.0,
+        7.0,
+        1.2
+      ],
+      "duration_sec": 24.99862766265869
+    },
+    {
+      "key": [
+        12,
+        0,
+        1
+      ],
+      "start_time_sec": 60.78048539161682,
+      "end_time_sec": 299.778760433197,
+      "message_count": 479,
+      "representative_point": [
+        12.0,
+        0.0,
+        1.2
+      ],
+      "duration_sec": 238.9982750415802
+    }
+  ]
+}

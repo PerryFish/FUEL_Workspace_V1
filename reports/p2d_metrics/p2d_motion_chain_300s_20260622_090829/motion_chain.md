@@ -1,0 +1,41 @@
+# P2D Motion Chain p2d_motion_chain_300s_20260622_090829
+
+- run_id: p2d_motion_chain_300s_20260622_090829
+- duration_sec: 300.00564527511597
+- odom_total_distance: 0.10123519195861462
+- uav_total_distance: 0.10123519195861462
+- odom_net_displacement: 0.10123519195861475
+- uav_net_displacement: 0.10123519195861475
+- odom_max_no_motion_duration_sec: 299.5630552768707
+- goal_msg_count: 600
+- goal_switch_count: 2
+- active_goal_segments: []
+- active_goal_to_path_endpoint_distance: [7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535, 7.805698684593535]
+- active_goal_to_current_odom_distance: 7.805698684593533
+- active_goal_hold_duration: 299.5746920108795
+- active_path_msg_count: 3000
+- active_path_update_count: 1
+- active_path_endpoint: (0.8476680806039356, -5.460276599496719, 1.2)
+- active_path_length: 6.594431236275418
+- active_path_endpoint_to_goal_distance_avg: 7.050957763302419
+- active_path_endpoint_to_goal_distance_max: 7.805698684593535
+- active_path_stale_duration_sec: 299.8745274543762
+- active_path_same_hash_max_duration_sec: 299.8745274543762
+- travel_traj_msg_count: 3023
+- travel_traj_update_count: 47
+- travel_traj_endpoint: (0.8476680806039356, -5.460276599496719, 1.2)
+- travel_traj_endpoint_to_goal_distance_avg: 6.944370823732287
+- travel_traj_same_hash_max_duration_sec: 277.56186389923096
+- position_cmd_msg_count: 6000
+- position_cmd_update_count: 1
+- position_cmd_total_variation: 0.0
+- position_cmd_to_odom_distance_avg: 0.00028513168686687527
+- position_cmd_to_odom_distance_max: 0.09717793900087313
+- position_cmd_same_pose_max_duration_sec: 299.96006202697754
+- traj_server_status_count: 3000
+- traj_server_stale_path_hold_count: 38
+- quadrotor_sim_status_count: 8999
+- quadrotor_sim_motion_blocked_count: 8999
+- frontier_count_start: 106
+- frontier_count_end: 106
+- main_chain_break: PATH_FEASIBILITY

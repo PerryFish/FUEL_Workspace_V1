@@ -1,0 +1,90 @@
+diff --git a/scripts/analyze_p2b_stuck_events.py b/scripts/analyze_p2b_stuck_events.py
+new file mode 100755
+index 0000000..143dd7d
+--- /dev/null
++++ b/scripts/analyze_p2b_stuck_events.py
+@@ -0,0 +1,84 @@
++#!/usr/bin/env python3
++import argparse
++import json
++import os
++from typing import Dict, List
++
++
++def load_metrics(metrics_dir: str) -> Dict:
++    with open(os.path.join(metrics_dir, "metrics.json"), "r", encoding="utf-8") as f:
++        return json.load(f)
++
++
++def classify(metrics: Dict) -> str:
++    events = metrics.get("event_counts", {})
++    if events.get("REPEATED_GOAL", 0) > 0 or metrics.get("repeated_goal_count", 0) > max(10, metrics.get("unique_goal_count", 0)):
++        return "REPEATED_GOAL"
++    if metrics.get("min_goal_distance", 999.0) < 0.5 and metrics.get("goal_msg_count", 0) > 3:
++        return "GOAL_TOO_CLOSE"
++    if events.get("FRONTIER_EMPTY", 0) > 0:
++        return "FRONTIER_EMPTY"
++    frontier_series = metrics.get("frontier_candidate_count_series", [])
++    if len(set(frontier_series[-30:])) <= 2 and len(frontier_series) >= 30:
++        if metrics.get("coverage_proxy_gain", 0.0) < 0.01:
++            return "FRONTIER_NOT_UPDATED"
++    if events.get("PLANNER_STALL", 0) > 0 or metrics.get("trajectory_count", 0) <= 10:
++        return "PLANNER_STALL"
++    if metrics.get("planner_pos_cmd_count", 0) > 100 and metrics.get("uav_total_distance", 0.0) < 1.0:
++        return "CONTROLLER_OR_SIM_STALL"
++    if metrics.get("coverage_proxy_end", 0.0) > 0.85 or (
++        metrics.get("coverage_proxy_gain", 0.0) < 0.01 and metrics.get("frontier_candidate_count_series", [1])[-1] < 5
++    ):
++        return "COVERAGE_SATURATED"
++    if metrics.get("stuck_event_count", 0) > 0 or metrics.get("max_no_motion_duration_sec", 0.0) >= 20.0:
++        return "LOCAL_MINIMUM"
++    return "UNKNOWN"
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--metrics-dir", required=True)
++    args = parser.parse_args()
++    metrics = load_metrics(args.metrics_dir)
++    cause = classify(metrics)
++    events: List[Dict] = metrics.get("stuck_events", [])
++    analysis = {
++        "run_id": metrics.get("run_id"),
++        "main_stuck_cause": cause,
++        "stuck_event_count": metrics.get("stuck_event_count", 0),
++        "event_counts": metrics.get("event_counts", {}),
++        "coverage_proxy_gain": metrics.get("coverage_proxy_gain", 0.0),
++        "uav_total_distance": metrics.get("uav_total_distance", 0.0),
++        "trajectory_count": metrics.get("trajectory_count", 0),
++        "goal_msg_count": metrics.get("goal_msg_count", 0),
++        "unique_goal_count": metrics.get("unique_goal_count", 0),
++        "repeated_goal_count": metrics.get("repeated_goal_count", 0),
++        "events": events,
++    }
++    with open(os.path.join(args.metrics_dir, "stuck_analysis.json"), "w", encoding="utf-8") as f:
++        json.dump(analysis, f, indent=2)
++    with open(os.path.join(args.metrics_dir, "stuck_analysis.md"), "w", encoding="utf-8") as f:
++        f.write(f"# P2B Stuck Analysis {metrics.get('run_id')}\n\n")
++        f.write(f"- main_stuck_cause: {cause}\n")
++        f.write(f"- stuck_event_count: {metrics.get('stuck_event_count', 0)}\n")
++        f.write(f"- event_counts: {metrics.get('event_counts', {})}\n")
++        f.write(f"- coverage_proxy_gain: {metrics.get('coverage_proxy_gain', 0.0)}\n")
++        f.write(f"- uav_total_distance: {metrics.get('uav_total_distance', 0.0)}\n")
++        f.write(f"- trajectory_count: {metrics.get('trajectory_count', 0)}\n")
++        f.write("\n## Events\n\n")
++        for event in events:
++            f.write(
++                f"- t={event.get('time_sec'):.1f}s type={event.get('event_type')} "
++                f"reason={event.get('reason')} pos={event.get('position')} "
++                f"goal={event.get('goal')} frontier={event.get('frontier_count')} "
++                f"coverage={event.get('coverage_proxy')}\n"
++            )
++    print("P2B_STUCK_ANALYSIS_RESULT")
++    print(f"metrics_dir={args.metrics_dir}")
++    print(f"main_stuck_cause={cause}")
++    print(f"stuck_event_count={metrics.get('stuck_event_count', 0)}")
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

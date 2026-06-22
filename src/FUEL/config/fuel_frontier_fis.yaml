@@ -1,0 +1,37 @@
+fuel_ros2:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    frontier_fis:
+      enable_frontier_fis: false
+      use_frontier_goal_source: false
+      min_frontier_cluster_size: 5
+      max_frontier_cluster_size: 5000
+      frontier_resolution: 0.2
+      viewpoint_distance: 1.5
+      viewpoint_z_min: 0.8
+      viewpoint_z_max: 2.5
+      information_gain_weight: 1.0
+      distance_cost_weight: 0.3
+      z_penalty_weight: 0.2
+      debug_publish_rate: 2.0
+      max_frontier_markers: 200
+
+fuel_mvp_node:
+  ros__parameters:
+    planner_backend: "mvp"
+
+    frontier_fis:
+      enable_frontier_fis: false
+      use_frontier_goal_source: false
+      min_frontier_cluster_size: 5
+      max_frontier_cluster_size: 5000
+      frontier_resolution: 0.2
+      viewpoint_distance: 1.5
+      viewpoint_z_min: 0.8
+      viewpoint_z_max: 2.5
+      information_gain_weight: 1.0
+      distance_cost_weight: 0.3
+      z_penalty_weight: 0.2
+      debug_publish_rate: 2.0
+      max_frontier_markers: 200

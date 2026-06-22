@@ -1,0 +1,101 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.18
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 100; 100; 105
+      Enabled: true
+      Line Style:
+        Line Width: 0.02
+        Value: Lines
+      Name: Low Contrast Grid
+      Plane: XY
+      Plane Cell Count: 40
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Complex Walls / Obstacles
+      Topic:
+        Value: /fuel/p11_lite/complex_env/wall_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Acceptance Main View - UAV / Frontier / Goal / Current Planned Path / Status
+      Topic:
+        Value: /fuel/p11_lite/visual/all_markers
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Actual Executed Trail
+      Topic:
+        Value: /fuel/p11_lite/visual/uav_trail
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Current Planned Path
+      Topic:
+        Value: /fuel/p11_lite/visual/path_markers
+      Value: true
+    - Class: rviz_default_plugins/Odometry
+      Color: 255; 110; 0
+      Enabled: true
+      Keep: 120
+      Name: UAV Body Odom
+      Shape: Arrow
+      Topic:
+        Value: /odom
+      Value: true
+    - Alpha: 0.15
+      Class: rviz_default_plugins/PointCloud2
+      Enabled: false
+      Name: Raw Free Space secondary debug
+      Topic:
+        Value: /fuel/p11_lite/local_free_points
+      Value: false
+    - Alpha: 0.25
+      Class: rviz_default_plugins/PointCloud2
+      Enabled: false
+      Name: Raw Frontier Candidates secondary debug
+      Topic:
+        Value: /fuel/p11_lite/frontier_candidates_raw
+      Value: false
+    - Alpha: 0.35
+      Class: rviz_default_plugins/PointCloud2
+      Enabled: false
+      Name: Raw Occupied Points secondary debug
+      Topic:
+        Value: /fuel/p11_lite/local_occupied_points
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 24; 24; 28
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 46
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 1
+      Name: Acceptance Top Overview
+      Pitch: 1.35
+      Target Frame: map
+      Yaw: 0.78
+Window Geometry:
+  Height: 950
+  Width: 1500

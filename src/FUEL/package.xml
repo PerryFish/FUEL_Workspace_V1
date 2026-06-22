@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>fuel_ros2</name>
+  <version>0.1.0</version>
+  <description>ROS2 Humble MVP wrapper for FUEL-style 3D exploration planning.</description>
+  <maintainer email="nuaa@example.com">nuaa</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>eigen</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
